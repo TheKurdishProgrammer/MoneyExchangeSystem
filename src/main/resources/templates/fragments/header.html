@@ -1,0 +1,59 @@
+<header class="topbar" data-navbarbg="skin5" th:fragment="header">
+    <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+        <div class="navbar-header" data-logobg="skin5">
+            <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
+                    class="ti-menu ti-close"></i></a>
+
+            <a class="navbar-brand" href="index.html">
+                <b class="logo-icon p-l-10">
+
+                    <!--                    src="../../static/images/logo.png"-->
+                    <img alt="homepage" class="light-logo" th:src="@{/images/logo.png}"/>
+
+                </b>
+
+                <span class="logo-text" style="padding-top: 10px;">
+
+
+                            <h4>Twekl Company</h4>
+                        </span>
+
+            </a>
+
+            <a aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+               class="topbartoggler d-block d-md-none waves-effect waves-light" data-target="#navbarSupportedContent"
+               data-toggle="collapse" href="javascript:void(0)"><i class="ti-more"></i></a>
+        </div>
+
+        <div class="navbar-collapse collapse" data-navbarbg="skin5" id="navbarSupportedContent">
+
+            <ul class="navbar-nav float-left mr-auto">
+                <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light"
+                                                          data-sidebartype="mini-sidebar" href="javascript:void(0)"><i
+                        class="mdi mdi-menu font-24"></i></a></li>
+
+            </ul>
+
+            <ul class="navbar-nav float-right">
+
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" aria-haspopup="true"
+                       class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+                       data-toggle="dropdown" href=""><img alt="user" class="rounded-circle"
+                                                           src="../../static/images/users/1.jpg" width="31"></a>
+                    <div class="dropdown-menu dropdown-menu-right user-dd animated">
+
+
+                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i>Setting</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i>
+                            Logout</a>
+
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+    </nav>
+</header>

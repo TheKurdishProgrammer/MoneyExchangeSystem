@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+</head>
+<body>
+
+<div class="container" id="main-wrapper" layout:fragment="content">
+
+    <!--    <div class="preloader">-->
+    <!--        <div class="lds-ripple">-->
+    <!--            <div class="lds-pos"></div>-->
+    <!--            <div class="lds-pos"></div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+
+    <div class="page-wrapper">
+
+
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                    <h4 class="page-title">Dashboard</h4>
+                    <div class="ml-auto text-right">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li aria-current="page" class="breadcrumb-item active">Dashboard</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid">
+
+
+            <div class="row">
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-hover bg-cyan">
+                        <div class="box  text-center">
+                            <h1 class="font-light text-white"><i class="mdi mdi-bank"></i></h1>
+                            <h6 class="text-white">Balance</h6>
+                        </div>
+                        <div class="card-body text-white text-center">
+                            Your Balance is : 1870 IQD
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-hover bg-success">
+                        <div class="box  text-center">
+                            <h1 class="font-light text-white"><i class="fas fa-file-invoice-dollar"></i></h1>
+                            <h6 class="text-white">Sent Transactions</h6>
+                        </div>
+                        <div class="card-body text-white text-center">
+                            12 Transactions 1600 IQD
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-hover bg-warning">
+                        <div class="box  text-center">
+                            <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
+                            <h6 class="text-white">Received Transactions</h6>
+                        </div>
+                        <div class="card-body text-white text-center">
+                            12 Transactions 1600 IQD
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-hover bg-danger">
+                        <div class="box  text-center">
+                            <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
+                            <h6 class="text-white">Branches</h6>
+                        </div>
+                        <div class="card-body text-white text-center">
+                            12 Active Branches
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="alert alert-success" role="alert">
+                Twekl Company Admin - 0 Notifications
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>
