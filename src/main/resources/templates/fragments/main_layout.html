@@ -14,23 +14,57 @@
 
     <title>Twekl CO</title>
 
-    <link rel="stylesheet" th:href="@{/css/style.min.css}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css"
-          rel="stylesheet">
+    <link href="/libs/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet"/>
+    <link href="/extra-libs/calendar/calendar.css" rel="stylesheet"/>
+    <link href="/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 
 
 </head>
 
 <body>
-<!--header.html  that's here  -->
-<div th:replace="fragments/header :: header"></div>
+<div id="main-wrapper" data-sidebartype="mini-sidebar">
 
-<div th:replace="fragments/assidebar :: asside"></div>
+    <!--header.html  that's here  -->
+    <div th:replace="fragments/header :: header"></div>
 
-<div layout:fragment="content"></div>
+    <div th:replace="fragments/assidebar :: asside"></div>
 
-<!--footer.html  that's here  -->
-<div th:replace="fragments/footer :: footer"></div>
+
+    <div layout:fragment="content">
+
+    </div>
+    <!--footer.html  that's here  -->
+    <div th:replace="fragments/footer :: footer"></div>
+
+
+</div>
+
+
+<script src="/libs/jquery/dist/jquery.min.js"></script>
+<script src="/js/jquery.ui.touch-punch-improved.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+
+<script src="https://kit.fontawesome.com/a98b0d209e.js"></script>
+<script src="/libs/popper.js/dist/umd/popper.min.js"></script>
+<script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+<script src="/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+<script src="/extra-libs/sparkline/sparkline.js"></script>
+
+<script src="/js/waves.js"></script>
+
+<script src="/js/sidebarmenu.js"></script>
+
+<script src="/js/custom.min.js"></script>
+
+
+<script src="/libs/moment/min/moment.min.js"></script>
+<script src="/libs/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="/js/pages/calendar/cal-init.js"></script>
+
 
 </body>
 
