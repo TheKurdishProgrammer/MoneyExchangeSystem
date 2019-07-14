@@ -1,4 +1,4 @@
-<!Doctype>
+<!DOCTYPE HTML>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
@@ -24,22 +24,30 @@
 </head>
 
 <body>
-<div id="main-wrapper" data-sidebartype="mini-sidebar">
-
+<div id="main-wrapper">
     <!--header.html  that's here  -->
+
+        <div class="preloader">
+            <div class="lds-ripple">
+                <div class="lds-pos"></div>
+                <div class="lds-pos"></div>
+            </div>
+        </div>
+
     <div th:replace="fragments/header :: header"></div>
 
     <div th:replace="fragments/assidebar :: asside"></div>
 
 
-    <div layout:fragment="content">
+<!--    <th:block layout:fragment="content"> </th:block>-->
 
-    </div>
+    <div class="page-wrapper" layout:fragment="content"></div>
+
     <!--footer.html  that's here  -->
-    <div th:replace="fragments/footer :: footer"></div>
-
 
 </div>
+
+</body>
 
 
 <script src="/libs/jquery/dist/jquery.min.js"></script>

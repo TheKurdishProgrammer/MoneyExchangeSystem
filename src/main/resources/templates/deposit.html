@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+</head>
+<body>
+
+<div   layout:fragment="content">
+
+
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                    <h4 class="page-title">Deposit Money </h4>
+                    <div class="ml-auto text-right">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Finance</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Deposit</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid">
+
+
+
+
+
+
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-user" aria-hidden="true"></i></span>
+                    </div>
+                    <input class="form-control" id="validationCustomUsername" placeholder="Select Account" aria-describedby="inputGroupPrepend" required="">
+
+                </div>
+                <br>
+
+                <div class="form-row">
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-money-check-alt" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Amount" aria-describedby="inputGroupPrepend" required="">
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-dollar-sign" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Currency" aria-describedby="inputGroupPrepend" required="">
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+                <br>
+
+
+                <button type="submit" class="btn btn-cyan"><i class="far fa-credit-card" aria-hidden="true"></i> Deposit Money</button>
+            </form>
+
+
+
+
+
+
+
+        </div>
+
+    <div th:replace="fragments/footer :: footer" ></div>
+
+
+
+
+</div>
+
+</body>
+
+</html>
+<!--    <div class="preloader">-->
+<!--        <div class="lds-ripple">-->
+<!--            <div class="lds-pos"></div>-->
+<!--            <div class="lds-pos"></div>-->
+<!--        </div>-->
+<!--    </div>-->

@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+</head>
+<body>
+
+<div  class="page-wrapper" layout:fragment="content">
+
+
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                    <h4 class="page-title">Withdraw Money </h4>
+                    <div class="ml-auto text-right">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Finance</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Withdraw</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container-fluid">
+
+
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-user" aria-hidden="true"></i></span>
+                    </div>
+                    <input class="form-control" id="validationCustomUsername" placeholder="Select Account" aria-describedby="inputGroupPrepend" required="">
+
+                </div>
+                <br>
+
+                <div class="form-row">
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-money-check-alt" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Amount" aria-describedby="inputGroupPrepend" required="">
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-dollar-sign" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Currency" aria-describedby="inputGroupPrepend" required="">
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-user" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Received By" aria-describedby="inputGroupPrepend" required="">
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-hashtag" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Phone Number" aria-describedby="inputGroupPrepend" required="">
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <br>
+                <div class="row">
+
+                    <div class="col">
+                        <div id="sign" class="form-control kbw-signature" style="width:100%; height: 80px;">
+
+                            <canvas width="180.333" height="66">Your browser doesn't support signing</canvas></div>
+
+
+
+                    </div>
+                    <div class="col">
+                        <textarea class="form-control" placeholder="Notes" style="width: 100%; height: 80px;"></textarea>
+
+                    </div>
+
+
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+
+                    </div>
+                </div>
+
+                <br>
+                <div onclick="$('#sign').signature('clear');" class="btn btn-dark"><i class="fas fa-undo-alt" aria-hidden="true"></i></div>
+                <br>
+
+                <br>
+                <button type="submit" class="btn btn-warning"><i class="far fa-credit-card" aria-hidden="true"></i> Withdraw Money</button>
+            </form>
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+    <div th:replace="fragments/footer :: footer" ></div>
+
+
+
+</div>
+
+</body>
+
+</html>

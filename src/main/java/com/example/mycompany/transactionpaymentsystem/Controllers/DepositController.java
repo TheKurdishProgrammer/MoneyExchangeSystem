@@ -5,12 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/send")
-public class SendMoneyController {
+@RequestMapping("/deposite")
+public class DepositController {
 
 
-    @RequestMapping(value = {"/", ""})
-    public String sendMoney() {
-        return "send";
+    @RequestMapping(value = {"/",""})
+    public String depositMoney() {
+        return "deposit";
+
     }
+
 }

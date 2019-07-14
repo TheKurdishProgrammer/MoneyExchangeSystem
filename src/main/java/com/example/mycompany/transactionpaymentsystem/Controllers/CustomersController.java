@@ -8,4 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/customers")
 public class CustomersController {
 
+    @RequestMapping(value = {"/",""})
+    public String getCustomers() {
+        return "customers";
+
+    }
 }

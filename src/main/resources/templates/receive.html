@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{fragments/main_layout}" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Receive Money</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Receive</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+
+
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+
+                <div class="col">
+                    <label for="tr_num">Transaction Number Or Receiver Name :</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-hashtag"
+                                                                                     aria-hidden="true"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="tr_num" placeholder="Ex : 03264 or Receiver Name"
+                               aria-describedby="inputGroupPrepend" required="">
+
+                    </div>
+                </div>
+
+            </div>
+            <br>
+
+
+            <button type="submit" class="btn btn-info"><i class="fas fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp;Get
+                Informations
+            </button>
+        </form>
+
+
+        <br/>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title m-b-0">Transaction Detail</h5>
+                    </div>
+
+                    <table class="table">
+
+                        <tbody>
+                        <tr>
+                            <th>Transaction Number :</th>
+                            <td>#19</td>
+                        </tr>
+
+                        <tr>
+                            <th>Sender Name :</th>
+                            <td>Ahmed Sirwan Tahr</td>
+                        </tr>
+                        <tr>
+                            <th>Receiver Name :</th>
+                            <td>Zhyar A Jamal</td>
+                        </tr>
+                        <tr>
+                            <th>Date-Time :</th>
+                            <td>20/01/2020 05:33 AM</td>
+                        </tr>
+                        <tr>
+                            <th>Receiving Currency</th>
+                            <td>IQD</td>
+                        </tr>
+
+                        <tr>
+                            <th>Amount :</th>
+                            <td>350,000 IQD</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+
+                <div id="attachments">
+                    <div class="justify-content-start row">
+
+                        <div class="m-1 col-sm-5 ">
+                            <div class="bg-white" id="sign" style="width:100%; height: 80px;"></div>
+
+                        </div>
+
+                         <div class="m-1 col-sm-6">
+                            <textarea placeholder="Notes" style="width: 100%; height: 80px;"></textarea>
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-12 ">
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+
+
+                <button type="submit" class="btn btn-success"><i class="far fa-check-circle" aria-hidden="true"></i>
+                    &nbsp;&nbsp;Mark as Received
+                </button>
+
+                <button type="submit" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left"
+                                                                aria-hidden="true"></i> &nbsp;&nbsp;Back
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+
+</div>
+
+</body>
+
+</html>
+<!--    <div class="preloader">-->
+<!--        <div class="lds-ripple">-->
+<!--            <div class="lds-pos"></div>-->
+<!--            <div class="lds-pos"></div>-->
+<!--        </div>-->
+<!--    </div>-->
