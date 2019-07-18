@@ -24,6 +24,7 @@ public class Transaction {
     private String receiverName;
     private long receiverPhoneNumber;
 
+    private String notes;
     private Date date;
 
     private double sendingAmount;
