@@ -3,7 +3,10 @@ package com.example.mycompany.transactionpaymentsystem.services;
 import com.example.mycompany.transactionpaymentsystem.models.Transaction;
 import com.example.mycompany.transactionpaymentsystem.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class TransactionService implements ITransactionService {
 
     @Autowired
