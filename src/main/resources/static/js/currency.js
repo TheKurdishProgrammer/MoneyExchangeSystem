@@ -39,33 +39,36 @@ function convertCurrency(amount, fromCurrency, toCurrency, cb) {
     // var https = require('https');
 
 
+    $.getJSON(url).then(function (data) {
+        console.log(data[query]);
+    })
 
-    $.get(url, function (res,status) {
-        var body = '';
-
-        alert("hello "+ JSON.parse(res)+ status);
-
-        res.on('data', function (chunk) {
-            body += chunk;
-        });
-
-        res.on('end', function () {
-            try {
-                var jsonObj = JSON.parse(body);
-
-                var val = jsonObj[query];
-                if (val) {
-                    var total = val * amount;
-                    cb(null, Math.round(total * 100) / 100);
-                } else {
-                    var err = new Error("Value not found for " + query);
-                    console.log(err);
-                    cb(err);
-                }
-            } catch (e) {
-                console.log("Parse error: ", e);
-                cb(e);
-            }
-        });
-    });
+    // $.get("https://api.nal.usda.gov/ndb/search/?format=json&q=banana&max=25&ds=Standard%20Reference&offset=0&api_key=rWKfuG6YjQU9h0WMNksynapfFqcr3BJWK5giCqRQ", function (res,status) {
+    //     var body = '';
+    //
+    //     alert("hello "+ res+ status);
+    //
+    //     // res.on('data', function (chunk) {
+    //     //     body += chunk;
+    //     // });
+    //
+    //     // res.on('end', function () {
+    //     //     try {
+    //     //         var jsonObj = JSON.parse(body);
+    //     //
+    //     //         var val = jsonObj[query];
+    //     //         if (val) {
+    //     //             var total = val * amount;
+    //     //             cb(null, Math.round(total * 100) / 100);
+    //     //         } else {
+    //     //             var err = new Error("Value not found for " + query);
+    //     //             console.log(err);
+    //     //             cb(err);
+    //     //         }
+    //     //     } catch (e) {
+    //     //         console.log("Parse error: ", e);
+    //     //         cb(e);
+    //     //     }
+    //     // });
+    // });
 }
