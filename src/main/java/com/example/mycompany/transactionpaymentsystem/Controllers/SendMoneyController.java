@@ -53,21 +53,28 @@ public class SendMoneyController {
     @PostMapping(value = {"/", ""})
     public String sendMoney(HttpServletRequest request, Transaction transaction, BindingResult result) {
 
+
+        /*
+
+                1- date
+                2-sending and receiving currency
+                3-receicved money
+         */
         if (result.hasErrors()) {
             for (ObjectError allError : result.getAllErrors())
                 System.out.println(allError.getDefaultMessage());
             return "send";
         }
 
-        Enumeration names = request.getParameterNames();
-        while (names.hasMoreElements())
-            System.out.println(names.nextElement().toString());
+//        Enumeration names = request.getParameterNames();
+//        while (names.hasMoreElements())
+//            System.out.println(names.nextElement().toString());
 
 
 
         int branchId = Integer.parseInt(request.getParameter("id"));
 
-        transactionService.save(transaction);
+//        transactionService.save(transaction);
 
 
         //retrieving both branches
@@ -76,6 +83,8 @@ public class SendMoneyController {
 
         transaction.setToBranch(toBranch);
         transaction.setFromBranch(fromBranch);
+
+
 
         transactionService.save(transaction);
 

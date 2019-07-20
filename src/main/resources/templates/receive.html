@@ -5,6 +5,46 @@
 
 <head>
     <title>Spring Boot Thymeleaf + Spring Security</title>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+
+            $("#getTransaction").on('click', function (e) {
+                e.preventDefault();
+                var url = window.location.origin + $('form').attr('action') + $('#tr_num').val();     // Returns full URL (https://example.com/path/example.html)
+                console.log(url);
+                $.getJSON(url, function (data) {
+
+                    console.log(data);
+                    $('#id').html(data.id)  ;
+                    $('#senderName').html(data.senderName)  ;
+                    $('#receiveName').html(data.receiverName)  ;
+                    $('#date').html(data.date)  ;
+                    $('#receivingCurrency').html(data.receivingCurrency)  ;
+                    $('#receivedAmount').html(data.receivedMoney)  ;
+
+
+
+
+
+
+
+
+
+
+
+
+                });
+
+            })
+        });
+
+
+    </script>
 </head>
 <body>
 
@@ -30,7 +70,7 @@
     <div class="container-fluid">
 
 
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="/receive/transactions/" method="get" enctype="multipart/form-data">
             <div class="form-row">
 
                 <div class="col">
@@ -40,7 +80,8 @@
                             <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-hashtag"
                                                                                      aria-hidden="true"></i></span>
                         </div>
-                        <input type="text" class="form-control" id="tr_num" placeholder="Ex : 03264 or Receiver Name"
+                        <input th:name="trName" type="text" class="form-control" id="tr_num"
+                               placeholder="e.g : 03264 or Receiver Name"
                                aria-describedby="inputGroupPrepend" required="">
 
                     </div>
@@ -50,8 +91,9 @@
             <br>
 
 
-            <button type="submit" class="btn btn-info"><i class="fas fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp;Get
-                Informations
+            <button id="getTransaction" type="submit" class="btn btn-info"><i class="fas fa-credit-card"
+                                                                              aria-hidden="true"></i> &nbsp;&nbsp;Get
+                Information
             </button>
         </form>
 
@@ -70,29 +112,29 @@
                         <tbody>
                         <tr>
                             <th>Transaction Number :</th>
-                            <td>#19</td>
+                            <td id="id">#19</td>
                         </tr>
 
                         <tr>
                             <th>Sender Name :</th>
-                            <td>Ahmed Sirwan Tahr</td>
+                            <td id="senderName">Ahmed Sirwan Tahr</td>
                         </tr>
                         <tr>
                             <th>Receiver Name :</th>
-                            <td>Zhyar A Jamal</td>
+                            <td id="receiveName">Zhyar A Jamal</td>
                         </tr>
                         <tr>
                             <th>Date-Time :</th>
-                            <td>20/01/2020 05:33 AM</td>
+                            <td id="date">20/01/2020 05:33 AM</td>
                         </tr>
                         <tr>
                             <th>Receiving Currency</th>
-                            <td>IQD</td>
+                            <td id="receivingCurrency">IQD</td>
                         </tr>
 
                         <tr>
                             <th>Amount :</th>
-                            <td>350,000 IQD</td>
+                            <td id="receivedAmount">350,000 IQD</td>
                         </tr>
                         </tbody>
                     </table>
@@ -109,7 +151,7 @@
 
                         </div>
 
-                         <div class="m-1 col-sm-6">
+                        <div class="m-1 col-sm-6">
                             <textarea placeholder="Notes" style="width: 100%; height: 80px;"></textarea>
                         </div>
 
@@ -143,6 +185,7 @@
 
 
 </div>
+
 
 </body>
 

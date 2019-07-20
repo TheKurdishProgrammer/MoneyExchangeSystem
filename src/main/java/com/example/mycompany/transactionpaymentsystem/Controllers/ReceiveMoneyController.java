@@ -1,25 +1,45 @@
 package com.example.mycompany.transactionpaymentsystem.Controllers;
 
 
-import org.springframework.beans.factory.support.SimpleSecurityContextProvider;
-import org.springframework.boot.autoconfigure.security.reactive.ReactiveUserDetailsServiceAutoConfiguration;
+import com.example.mycompany.transactionpaymentsystem.models.DTO.TransactionDto;
+import com.example.mycompany.transactionpaymentsystem.models.Transaction;
+import com.example.mycompany.transactionpaymentsystem.services.TransactionService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.security.Permission;
-import java.security.Security;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/receive")
 public class ReceiveMoneyController {
 
+    @Autowired
+    private TransactionService transactionService;
+
+
     @RequestMapping(value = {"/", ""})
-    public String receiveMoney() {
-
-
+    public String index() {
 
         return "receive";
+    }
+
+
+    @RequestMapping(value = {"/transactions/{trName}", ""})
+    @ResponseBody
+    public TransactionDto receiveMoney(@PathVariable(value = "trName") String searchQuery, Model model) {
+        Optional<Transaction> transaction = transactionService.findById(searchQuery);
+
+        TransactionDto transactionDto = new ModelMapper().map(transaction.orElseGet(Transaction::new),TransactionDto.class);
+
+        //do the not found logic
+
+        //todo retrieving transaction think again and
+        // check in the html, weather go with form or without form
+        return transactionDto;
+
     }
 
 

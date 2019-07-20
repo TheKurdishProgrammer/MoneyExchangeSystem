@@ -3,13 +3,14 @@ package com.example.mycompany.transactionpaymentsystem.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Data
-@NoArgsConstructor
+ @NoArgsConstructor
 public class Transaction {
 
 
@@ -39,11 +40,24 @@ public class Transaction {
 
     private boolean isApproved;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private Branch fromBranch;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private Branch toBranch;
+
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", senderName='" + senderName + '\'' +
+                ", receiverName='" + receiverName + '\'' +
+                ", date=" + date +
+                ", receivingCurrency='" + receivingCurrency + '\'' +
+                ", receivedMoney=" + receivedMoney +
+                '}';
+    }
 }

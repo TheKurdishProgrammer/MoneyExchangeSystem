@@ -112,12 +112,14 @@
                                 <span class="input-group-text"><i class="fas fa-dollar-sign"
                                                                   aria-hidden="true"></i></span>
                         </div>
-                        <select aria-describedby="inputGroupPrepend" required="" id="sendingCurrency" class="form-control"
-                                name="id">
+                        <select aria-describedby="inputGroupPrepend" required="" th:name="sendingCurrency" id="sendingCurrency" class="form-control"
+                                >
                             <option selected value="">Sending Currency</option>
                             <option th:each="currency : ${currencies}"
-                                    th:value="${currency.id}"
+                                    th:value="${currency.currency}"
                                     th:utext="${currency.currency}"></option>
+                            <!--                                    th:value="${currency.id}"-->
+
                         </select>
 
 
@@ -130,12 +132,15 @@
                                 <span class="input-group-text"><i class="fas fa-dollar-sign"
                                                                   aria-hidden="true"></i></span>
                         </div>
-                        <select aria-describedby="inputGroupPrepend" required="" id="receivingCurrency" class="form-control"
+                        <select aria-describedby="inputGroupPrepend" required="" th:name="receivingCurrency" id="receivingCurrency"
+                                class="form-control"
                                 name="id">
                             <option selected disabled value="">Receiving Currency</option>
                             <option th:each="currency : ${currencies}"
-                                    th:value="${currency.id}"
+                                    th:value="${currency.currency}"
                                     th:utext="${currency.currency}"></option>
+                            <!--                                    th:value="${currency.id}"-->
+
                         </select>
                     </div>
                 </div>
@@ -161,7 +166,7 @@
                                 <span class="input-group-text"><i class="fas fa-hand-holding-usd"
                                                                   aria-hidden="true"></i></span>
                         </div>
-                        <input class="form-control" placeholder="Received Money" id="receivedMoney"
+                        <input class="form-control" placeholder="Received Money" th:name="receivedMoney" id="receivedMoney"
                                aria-describedby="inputGroupPrepend" required="">
 
                     </div>
