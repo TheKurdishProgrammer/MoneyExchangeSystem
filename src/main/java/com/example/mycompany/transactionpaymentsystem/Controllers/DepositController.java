@@ -2,6 +2,7 @@ package com.example.mycompany.transactionpaymentsystem.Controllers;
 
 
 import com.example.mycompany.transactionpaymentsystem.models.Customer;
+import com.example.mycompany.transactionpaymentsystem.models.CustomerCurrency;
 import com.example.mycompany.transactionpaymentsystem.models.Deposit;
 import com.example.mycompany.transactionpaymentsystem.services.CustomerService;
 import com.example.mycompany.transactionpaymentsystem.services.DepositService;
@@ -46,14 +47,21 @@ public class DepositController {
 
 
 
+
+        // using the customerId and currency ID reterivnve the customerCUrrency,
+        // then add it with the deposite
         int customerId = Integer.parseInt(request.getParameter("id"));
 
         Optional<Customer> customer = customerService.findById(customerId);
 
+
+
         if (!customer.isPresent()){
             //handle not found exception
         } else {
-            deposit.setCustomer(customer.get());
+//            deposit.set(customer.get());
+            //it goes here
+            deposit.setCustomerCurrency(new CustomerCurrency());
 
             depositService.save(deposit);
         }

@@ -27,6 +27,6 @@ public class Deposit {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn
-    private Customer customer;
+    private CustomerCurrency customerCurrency;
 
 }

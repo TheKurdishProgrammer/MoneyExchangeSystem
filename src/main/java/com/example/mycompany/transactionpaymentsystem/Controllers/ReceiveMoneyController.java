@@ -52,7 +52,7 @@ public class ReceiveMoneyController {
         transactionService.approve(trNum);
 
         return "{" +
-                "success:true" +
+                "\"success\":\"true\"" +
                 "}";
     }
 

@@ -29,7 +29,7 @@
                 $.getJSON(url, function (data) {
 
                     console.log(data);
-                    $('#id').html(data.id);
+                    $('#transaction_Id').html(data.id);
                     $('#senderName').html(data.senderName);
                     $('#receiveName').html(data.receiverName);
                     $('#date').html(data.date);
@@ -42,17 +42,20 @@
             })
 
 
-            $('#approveTransaction').on('click',function (e) {
+            $('#approveTransaction').on('click', function (e) {
                 //todo think again for approving button
                 var trId = $('#transaction_Id').html();
 
-                var url = window.location.origin + $('form').attr('action') +'approve?trNum='+ $('#tr_num').val()
+                var url = window.location.origin + $('form').attr('action') + 'approve?trNum=' + $('#tr_num').val()
                 console.log(url);
-                $.getJSON(url,function (data) {
+                $.getJSON(url, function (data) {
                     console.log(data);
+                    if (data['success'])
+                        alert('Transaction Money Received Successfully')
+                    else
+                        alert('Failed!');
+
                 });
-
-
             });
         });
 
@@ -184,8 +187,8 @@
                     <br>
 
 
-
-                    <button id="approveTransaction" type="submit" class="btn btn-success"><i class="far fa-check-circle" aria-hidden="true"></i>
+                    <button id="approveTransaction" type="submit" class="btn btn-success"><i class="far fa-check-circle"
+                                                                                             aria-hidden="true"></i>
                         &nbsp;&nbsp;Mark as Received
                     </button>
                     <button type="submit" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left"

@@ -24,6 +24,9 @@ public class Customer {
     //todo is phone number should be string or long?
     private long phoneNumber;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer",fetch = FetchType.LAZY)
-    private List<Deposit> deposits;
+//    @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer",fetch = FetchType.LAZY)
+//    private List<Deposit> deposits;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer",fetch=FetchType.LAZY)
+    private List<CustomerCurrency> customerCurrencies;
 }
