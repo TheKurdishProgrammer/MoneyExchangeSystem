@@ -6,10 +6,19 @@
 <head>
     <title>Spring Boot Thymeleaf + Spring Security</title>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
+          rel="stylesheet">
+    <link th:href="@{../css/jquery.signature.css}" rel="stylesheet">
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script th:src="@{../js/jquery.signature.js}"></script>
+
 
     <script>
 
+        //todo to external file
         $(document).ready(function () {
 
 
@@ -20,27 +29,31 @@
                 $.getJSON(url, function (data) {
 
                     console.log(data);
-                    $('#id').html(data.id)  ;
-                    $('#senderName').html(data.senderName)  ;
-                    $('#receiveName').html(data.receiverName)  ;
-                    $('#date').html(data.date)  ;
-                    $('#receivingCurrency').html(data.receivingCurrency)  ;
-                    $('#receivedAmount').html(data.receivedMoney)  ;
-
-
-
-
-
-
-
-
-
-
+                    $('#id').html(data.id);
+                    $('#senderName').html(data.senderName);
+                    $('#receiveName').html(data.receiverName);
+                    $('#date').html(data.date);
+                    $('#receivingCurrency').html(data.receivingCurrency);
+                    $('#receivedAmount').html(data.receivedMoney);
 
 
                 });
 
             })
+
+
+            $('#approveTransaction').on('click',function (e) {
+                //todo think again for approving button
+                var trId = $('#transaction_Id').html();
+
+                var url = window.location.origin + $('form').attr('action') +'approve?trNum='+ $('#tr_num').val()
+                console.log(url);
+                $.getJSON(url,function (data) {
+                    console.log(data);
+                });
+
+
+            });
         });
 
 
@@ -112,7 +125,7 @@
                         <tbody>
                         <tr>
                             <th>Transaction Number :</th>
-                            <td id="id">#19</td>
+                            <td id="transaction_Id">#19</td>
                         </tr>
 
                         <tr>
@@ -144,48 +157,58 @@
 
 
                 <div id="attachments">
-                    <div class="justify-content-start row">
+                    <div class="row">
 
-                        <div class="m-1 col-sm-5 ">
-                            <div class="bg-white" id="sign" style="width:100%; height: 80px;"></div>
+
+                        <div id="sig" class="col form-control" style="width:100%; height: 80px;"></div>
+
+
+                        <div class="col">
+                            <!--                            <div class="kbw-signature" id="sig" style="width:100%; height: 80px;"></div>-->
+
+
+                            <div class="col">
+                                <textarea placeholder="Notes" style="width: 100%; height: 80px;"></textarea>
+                            </div>
+
 
                         </div>
-
-                        <div class="m-1 col-sm-6">
-                            <textarea placeholder="Notes" style="width: 100%; height: 80px;"></textarea>
-                        </div>
-
+                        <br>
                     </div>
-                    <br>
+
                     <div class="row">
                         <div class="col-12 ">
                             <input type="file" class="form-control-file" id="exampleFormControlFile1">
-
                         </div>
                     </div>
+                    <br>
 
+
+
+                    <button id="approveTransaction" type="submit" class="btn btn-success"><i class="far fa-check-circle" aria-hidden="true"></i>
+                        &nbsp;&nbsp;Mark as Received
+                    </button>
+                    <button type="submit" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left"
+                                                                    aria-hidden="true"></i> &nbsp;&nbsp;Back
+                    </button>
                 </div>
-                <br>
-
-
-                <button type="submit" class="btn btn-success"><i class="far fa-check-circle" aria-hidden="true"></i>
-                    &nbsp;&nbsp;Mark as Received
-                </button>
-
-                <button type="submit" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left"
-                                                                aria-hidden="true"></i> &nbsp;&nbsp;Back
-                </button>
             </div>
+
         </div>
+
+
+        <div th:replace="fragments/footer :: footer"></div>
+
 
     </div>
 
 
-    <div th:replace="fragments/footer :: footer"></div>
+    <script>
+
+        var sig = $('#sig').signature();
 
 
-</div>
-
+    </script>
 
 </body>
 

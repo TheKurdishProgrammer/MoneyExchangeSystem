@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -58,7 +59,7 @@ public class SendMoneyController {
 
                 1- date
                 2-sending and receiving currency
-                3-receicved money
+                3-received money
          */
         if (result.hasErrors()) {
             for (ObjectError allError : result.getAllErrors())
@@ -81,15 +82,14 @@ public class SendMoneyController {
         Branch toBranch = branchService.getOne(branchId);
         Branch fromBranch = branchService.getOne(MY_BRACH_ID);
 
+
+
         transaction.setToBranch(toBranch);
         transaction.setFromBranch(fromBranch);
 
 
 
         transactionService.save(transaction);
-
-
-
 
         return "send";
     }

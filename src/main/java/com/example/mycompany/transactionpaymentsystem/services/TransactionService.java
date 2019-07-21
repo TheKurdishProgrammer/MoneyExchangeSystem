@@ -26,4 +26,11 @@ public class TransactionService     {
     public Optional<Transaction> findById(String searchQuery) {
          return transactionRepository.findById(Integer.valueOf(searchQuery));
     }
+
+    public void approve(String trNum) {
+         //todo id or name
+         Transaction transaction = transactionRepository.getOne(Integer.valueOf(trNum));
+         transaction.setApproved(true);
+         transactionRepository.save(transaction);
+    }
 }

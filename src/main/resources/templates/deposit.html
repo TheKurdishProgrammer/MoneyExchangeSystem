@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
-<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <title>Spring Boot Thymeleaf + Spring Security</title>
 </head>
@@ -29,16 +31,21 @@
         <div class="container-fluid">
 
 
-
-
-
-
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="/deposit/" method="post" enctype="multipart/form-data">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-user" aria-hidden="true"></i></span>
+                        <span id="accountInputGroup" class="input-group-text"><i class="fas fa-user" aria-hidden="true"></i></span>
                     </div>
-                    <input class="form-control" id="validationCustomUsername" placeholder="Select Account" aria-describedby="inputGroupPrepend" required="">
+
+                    <select th:id="id" aria-describedby="accountInputGroup" name="id" autocomplete="on" required="" id="accountList" class="form-control"
+                    >
+                        <option selected disabled value="">Select Account</option>
+                        <option th:each="customer : ${customers}"
+                                th:value="${customer.id}"
+                                th:utext="${customer.name}"></option>
+                        <!--                                    th:value="${currency.id}"-->
+
+                    </select>
 
                 </div>
                 <br>
@@ -47,18 +54,18 @@
                     <div class="col">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-money-check-alt" aria-hidden="true"></i></span>
+                                <span class="input-group-text" id="amountInputGroup"><i class="fas fa-money-check-alt" aria-hidden="true"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Amount" aria-describedby="inputGroupPrepend" required="">
+                            <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-describedby="amountInputGroup" required="">
 
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-dollar-sign" aria-hidden="true"></i></span>
+                                <span class="input-group-text"  id="currencyInputGroup"><i class="fas fa-dollar-sign" aria-hidden="true"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Currency" aria-describedby="inputGroupPrepend" required="">
+                            <input type="text" th:maxlength="3" class="form-control" name="currency" placeholder="Currency" aria-describedby="currencyInputGroup" required="">
                         </div>
                     </div>
 

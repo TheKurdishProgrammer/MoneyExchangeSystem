@@ -43,4 +43,18 @@ public class ReceiveMoneyController {
     }
 
 
+    @RequestMapping(value = {"/transactions/approve","/transactions/approve/"})
+    @ResponseBody
+    public String approveTransaction(@RequestParam(value = "trNum") String trNum){
+
+
+        // make sure approve is fulfilled
+        transactionService.approve(trNum);
+
+        return "{" +
+                "success:true" +
+                "}";
+    }
+
+
 }
