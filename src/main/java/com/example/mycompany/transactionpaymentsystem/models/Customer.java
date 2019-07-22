@@ -12,6 +12,16 @@ import java.util.List;
 @Entity
 public class Customer {
 
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                '}';
+    }
+
     @Id
     @GeneratedValue
     private int id;

@@ -22,6 +22,14 @@ public class CustomerCurrency {
     private Customer customer;
 
 
+    @Override
+    public String toString() {
+        return "CustomerCurrency{" +
+                "customer=" + customer.getName() +
+                ", currency=" + currency.getCurrency() +
+                '}';
+    }
+
     @ManyToOne
     @JoinColumn
     private Currency currency;

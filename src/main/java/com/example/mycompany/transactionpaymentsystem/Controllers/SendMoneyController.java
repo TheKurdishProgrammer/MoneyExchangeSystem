@@ -5,6 +5,7 @@ import com.example.mycompany.transactionpaymentsystem.models.Branch;
 import com.example.mycompany.transactionpaymentsystem.models.Currency;
 import com.example.mycompany.transactionpaymentsystem.models.Transaction;
 import com.example.mycompany.transactionpaymentsystem.services.BranchService;
+import com.example.mycompany.transactionpaymentsystem.services.CurrencyService;
 import com.example.mycompany.transactionpaymentsystem.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 @Controller
@@ -28,8 +27,13 @@ public class SendMoneyController {
 
     @Autowired
     private BranchService branchService;
-@Autowired
+    @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private CurrencyService currencyService;
+
+
 
 
     @RequestMapping(value = {"/", ""})
@@ -37,15 +41,10 @@ public class SendMoneyController {
 
         List<Branch> branches = branchService.getBranchesExcept(MY_BRACH_ID);
 
-        List<Currency> currencies = new ArrayList<>();
-
-        currencies.add(Currency.builder().id(1).currency("USD").build());
-        currencies.add(Currency.builder().id(2).currency("IQD").build());
-        currencies.add(Currency.builder().id(3).currency("EUR").build());
 
 
         model.addAttribute("branches", branches);
-        model.addAttribute("currencies", currencies);
+        model.addAttribute("currencies", currencyService.findAll());
 
         return "send";
 
@@ -72,7 +71,6 @@ public class SendMoneyController {
 //            System.out.println(names.nextElement().toString());
 
 
-
         int branchId = Integer.parseInt(request.getParameter("id"));
 
 //        transactionService.save(transaction);
@@ -83,10 +81,8 @@ public class SendMoneyController {
         Branch fromBranch = branchService.getOne(MY_BRACH_ID);
 
 
-
         transaction.setToBranch(toBranch);
         transaction.setFromBranch(fromBranch);
-
 
 
         transactionService.save(transaction);

@@ -3,6 +3,7 @@ package com.example.mycompany.transactionpaymentsystem.services;
 import com.example.mycompany.transactionpaymentsystem.models.Branch;
 import com.example.mycompany.transactionpaymentsystem.models.Transaction;
 import com.example.mycompany.transactionpaymentsystem.repositories.BranchRepository;
+import org.aspectj.apache.bcel.generic.BranchHandle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,8 @@ public class BranchService {
     @Autowired
     private BranchRepository branchRepository;
 
-     public Transaction save(Transaction transaction) {
-        return null;
+     public Branch save(Branch branch) {
+        return branchRepository.save(branch);
     }
 
 

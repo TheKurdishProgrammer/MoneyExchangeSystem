@@ -22,8 +22,8 @@ public class Deposit {
 
     private Date date;
 
-    @Column(length = 3)
-    private String currency;
+//    @Column(length = 3)
+//    private String currency;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn

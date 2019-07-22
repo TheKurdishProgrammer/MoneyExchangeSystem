@@ -3,6 +3,7 @@ package com.example.mycompany.transactionpaymentsystem.models;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,9 +11,16 @@ import java.util.List;
 
 @Entity
 @Data
-@Builder
+@NoArgsConstructor
+
 public class Currency {
 
+    @Override
+    public String toString() {
+        return "Currency{" +
+                "currency='" + currency + '\'' +
+                '}';
+    }
 
     @Id
     @GeneratedValue
