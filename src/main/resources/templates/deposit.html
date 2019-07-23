@@ -4,104 +4,158 @@
 >
 <head>
     <title>Spring Boot Thymeleaf + Spring Security</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+
+            $('#submitMoney').on('click', function (e) {
+
+                e.preventDefault();
+
+                $('.alert-danger').attr("hidden", "hidden");
+                $('.alert-success').attr("hidden", "hidden");
+
+
+                var url = window.location.origin + $('form').attr('action');     // Returns full URL (https://example.com/path/example.html)
+
+                console.log(url);
+
+                $.post(url, $("#deposit_form").serialize(), function (data) {
+
+
+                    var parseData = JSON.parse(data);
+                    console.log(parseData['success']);
+
+                    if (parseData['success'] === 'false') {
+                        console.log("noooooo");
+                        $('.alert-danger').removeAttr("hidden");
+                    } else {
+                        console.log("yeeeeeees");
+                        $('.alert-success').removeAttr("hidden");
+                    }
+                });
+
+            });
+        });
+    </script>
+
+
 </head>
 <body>
 
-<div   layout:fragment="content">
+<div layout:fragment="content">
 
 
-        <div class="page-breadcrumb">
-            <div class="row">
-                <div class="col-12 d-flex no-block align-items-center">
-                    <h4 class="page-title">Deposit Money </h4>
-                    <div class="ml-auto text-right">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Finance</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Deposit</li>
-                            </ol>
-                        </nav>
-                    </div>
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Deposit Money </h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Finance</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Deposit</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
         </div>
+    </div>
 
 
-        <div class="container-fluid">
+    <div class="container-fluid">
 
 
-            <form action="/deposit/" method="post" enctype="multipart/form-data">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span id="accountInputGroup" class="input-group-text"><i class="fas fa-user" aria-hidden="true"></i></span>
-                    </div>
-
-                    <select th:id="cusID" aria-describedby="accountInputGroup" name="cusID" autocomplete="on" required="" id="accountList" class="form-control"
-                    >
-                        <option selected disabled value="">Select Account</option>
-                        <option th:each="customer : ${customers}"
-                                th:value="${customer.id}"
-                                th:utext="${customer.name}"></option>
-                        <!--                                    th:value="${currency.id}"-->
-
-                    </select>
-
-                </div>
-                <br>
-
-                <div class="form-row">
-                    <div class="col">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="amountInputGroup"><i class="fas fa-money-check-alt" aria-hidden="true"></i></span>
-                            </div>
-                            <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-describedby="amountInputGroup" required="">
-
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"  id="currencyInputGroup"><i class="fas fa-dollar-sign" aria-hidden="true"></i></span>
-                            </div>
-                            <select aria-describedby="inputGroupPrepend" required="" th:name="curID" th:id="curID" class="form-control"
-                            >
-                                <option selected value="">Sending Currency</option>
-                                <option th:each="currency : ${currencies}"
-                                        th:value="${currency.id}"
-                                        th:utext="${currency.currency}"></option>
-                                <!--                                    th:value="${currency.id}"-->
-
-                            </select>
-                        </div>
-                    </div>
-
+        <form id="deposit_form" action="/deposit/" method="post" enctype="multipart/form-data">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span id="accountInputGroup" class="input-group-text"><i class="fas fa-user" aria-hidden="true"></i></span>
                 </div>
 
+                <select th:id="cusID" aria-describedby="accountInputGroup" name="cusID" autocomplete="on" required=""
+                        id="accountList" class="form-control"
+                >
+                    <option selected disabled value="">Select Account</option>
+                    <option th:each="customer : ${customers}"
+                            th:value="${customer.id}"
+                            th:utext="${customer.name}"></option>
+                    <!--                                    th:value="${currency.id}"-->
+
+                </select>
+
+            </div>
+            <br>
+
+            <div class="form-row">
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="amountInputGroup"><i class="fas fa-money-check-alt"
+                                                                                    aria-hidden="true"></i></span>
+                        </div>
+                        <input type="number" class="form-control" name="amount" placeholder="Amount"
+                               aria-describedby="amountInputGroup" required="">
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="currencyInputGroup"><i class="fas fa-dollar-sign"
+                                                                                      aria-hidden="true"></i></span>
+                        </div>
+                        <select aria-describedby="inputGroupPrepend" required="" th:name="curID" th:id="curID"
+                                class="form-control"
+                        >
+                            <option selected value="">Sending Currency</option>
+                            <option th:each="currency : ${currencies}"
+                                    th:value="${currency.id}"
+                                    th:utext="${currency.currency}"></option>
+                            <!--                                    th:value="${currency.id}"-->
+
+                        </select>
+                    </div>
+                </div>
+
+            </div>
 
 
-
-                <br>
-
-
-                <button type="submit" class="btn btn-cyan"><i class="far fa-credit-card" aria-hidden="true"></i> Deposit Money</button>
-            </form>
+            <br>
 
 
+            <button id="submitMoney" type="submit" class="btn btn-cyan"><i class="far fa-credit-card"
+                                                                           aria-hidden="true"></i> Deposit Money
+            </button>
 
 
+        </form>
 
+        <br/>
+        <div class="row">
+
+
+            <div hidden="hidden" class="alert alert-danger alert-dismissible" role="alert">
+                <strong>Could not deposit!</strong>
+                Customer no have box for such currency
+            </div>
+
+            <div hidden="hidden" class="alert alert-success  alert-dismissible" role="alert">
+                <strong>Money Deposited!</strong>
+                Please see the Deposit Invoice
+            </div>
 
 
         </div>
 
-    <div th:replace="fragments/footer :: footer" ></div>
-
-
-
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
 
 </div>
+
 
 </body>
 

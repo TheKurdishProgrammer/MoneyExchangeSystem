@@ -1,7 +1,48 @@
 <!DOCTYPE HTML>
-<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+
+>
 <head>
     <title>Spring Boot Thymeleaf + Spring Security</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+
+            $('#withDrawMoney').on('click', function (e) {
+
+                e.preventDefault();
+
+                // $('.alert-danger').attr("hidden","hidden");
+                // $('.alert-success').attr("hidden","hidden");
+
+
+                var url = window.location.origin + $('form').attr('action');     // Returns full URL (https://example.com/path/example.html)
+
+                console.log(url);
+
+                $.post(url, $("#withdraw_form").serialize(), function (data) {
+
+
+                    var parseData = JSON.parse(data);
+                    console.log(parseData['success']);
+
+                    if (parseData['success'] === 'false') {
+                        alert("Not Enough Amount Of currency");
+                        // $('.alert-danger').removeAttr("hidden");
+                    } else {
+                        console.log("yeeeeeees");
+                        alert("Money successfully")
+                        $('.alert-success').removeAttr("hidden");
+                    }
+                });
+
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -30,33 +71,54 @@
         <div class="container-fluid">
 
 
-            <form action="" method="post" enctype="multipart/form-data">
+            <form id="withdraw_form" action="/withdraw/" method="post" enctype="multipart/form-data">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-user" aria-hidden="true"></i></span>
+                        <span class="input-group-text" id="accountInputGroup"><i class="fas fa-user" aria-hidden="true"></i></span>
                     </div>
-                    <input class="form-control" id="validationCustomUsername" placeholder="Select Account" aria-describedby="inputGroupPrepend" required="">
 
+                    <select th:id="cusID" aria-describedby="accountInputGroup" name="cusID" autocomplete="on" required="" id="accountList" class="form-control"
+                    >
+                        <option selected disabled value="">Select Account</option>
+                        <option th:each="customer : ${customers}"
+                                th:value="${customer.id}"
+                                th:utext="${customer.name}"></option>
+                        <!--                                    th:value="${currency.id}"-->
+
+                    </select>
                 </div>
                 <br>
 
+
+                <script>
+
+
+
+                </script>
                 <div class="form-row">
                     <div class="col">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-money-check-alt" aria-hidden="true"></i></span>
+                                <span class="input-group-text" id="amountInputGroup"><i class="fas fa-money-check-alt" aria-hidden="true"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Amount" aria-describedby="inputGroupPrepend" required="">
+                            <input type="text" name="amount" class="form-control" placeholder="Amount" aria-describedby="amountInputGroup" required="">
 
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-dollar-sign" aria-hidden="true"></i></span>
+                                <span class="input-group-text" id="currencyInputGroup"><i class="fas fa-dollar-sign" aria-hidden="true"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Currency" aria-describedby="inputGroupPrepend" required="">
-                        </div>
+                            <select aria-describedby="currencyInputGroup" required="" th:name="curID" th:id="curID" class="form-control"
+                            >
+                                <option selected value="">Sending Currency</option>
+                                <option th:each="currency : ${currencies}"
+                                        th:value="${currency.id}"
+                                        th:utext="${currency.currency}"></option>
+                                <!--                                    th:value="${currency.id}"-->
+
+                            </select>                        </div>
                     </div>
 
                 </div>
@@ -65,18 +127,18 @@
                     <div class="col">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-user" aria-hidden="true"></i></span>
+                                <span class="input-group-text" id="recieveIG"><i class="fas fa-user" aria-hidden="true"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Received By" aria-describedby="inputGroupPrepend" required="">
+                            <input type="text" class="form-control" name="receiver" placeholder="Received By" aria-describedby="recieveIG" required="">
 
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-hashtag" aria-hidden="true"></i></span>
+                                <span class="input-group-text" id="phoneNumberIG"><i class="fas fa-hashtag" aria-hidden="true"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Phone Number" aria-describedby="inputGroupPrepend" required="">
+                            <input name="phoneNumber" type="text" class="form-control" id="validationCustomUsername" placeholder="Phone Number" aria-describedby="phoneNumberIG" required="">
                         </div>
                     </div>
 
@@ -96,7 +158,7 @@
 
                     </div>
                     <div class="col">
-                        <textarea class="form-control" placeholder="Notes" style="width: 100%; height: 80px;"></textarea>
+                        <textarea class="form-control" name="notes" placeholder="Notes" style="width: 100%; height: 80px;"></textarea>
 
                     </div>
 
@@ -115,20 +177,10 @@
                 <br>
 
                 <br>
-                <button type="submit" class="btn btn-warning"><i class="far fa-credit-card" aria-hidden="true"></i> Withdraw Money</button>
+                <button id="withDrawMoney" type="submit" class="btn btn-warning"><i class="far fa-credit-card" aria-hidden="true"></i> Withdraw Money</button>
             </form>
 
-
-
-
-
-
-
         </div>
-
-
-
-
 
     <div th:replace="fragments/footer :: footer" ></div>
 

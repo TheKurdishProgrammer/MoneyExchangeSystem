@@ -1,5 +1,8 @@
 <!DOCTYPE HTML>
-<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+
+>
 <head>
     <title>Spring Boot Thymeleaf + Spring Security</title>
 </head>
@@ -29,15 +32,18 @@
 
         <div class="container-fluid">
 
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="/transfer/" method="post" enctype="multipart/form-data">
                 <div class="form-row">
                     <div class="col">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-money-check-alt" aria-hidden="true"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="From" aria-describedby="inputGroupPrepend" required="">
 
+                            <input list="names" class="form-control" id="fromCustomerInput" name="cusID"/>
+                            <datalist id="names">
+                                <option th:each="customer : ${customers}" th:value="${customer.id}" th:label="${customer.name}">
+                            </datalist>
                         </div>
                     </div>
                     <div class="col-0 text-center" style="padding: 5px;">
