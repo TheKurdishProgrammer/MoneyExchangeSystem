@@ -1,4 +1,7 @@
-<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+
+>
 
 
 <div layout:fragment="content">
@@ -43,8 +46,8 @@
                         <h1 class="font-light text-white"><i class="fas fa-file-invoice-dollar"></i></h1>
                         <h6 class="text-white">Sent Transactions</h6>
                     </div>
-                    <div class="card-body text-white text-center">
-                        12 Transactions 1600 IQD
+                    <div   th:text="${branchSendTransactionsCount} + ' transactions'" class="card-body  text-white text-center">
+
                     </div>
                 </div>
             </div>
@@ -55,7 +58,7 @@
                         <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
                         <h6 class="text-white">Received Transactions</h6>
                     </div>
-                    <div class="card-body text-white text-center">
+                    <div th:text="${branchReceiveTransactionsCount} + ' transactions'"  class="card-body  text-white text-center">
                         12 Transactions 1600 IQD
                     </div>
                 </div>
@@ -67,7 +70,7 @@
                         <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
                         <h6 class="text-white">Branches</h6>
                     </div>
-                    <div class="card-body text-white text-center">
+                    <div  th:text="${branchCount}+' branches'" class="card-body  text-white text-center">
                         12 Active Branches
                     </div>
                 </div>

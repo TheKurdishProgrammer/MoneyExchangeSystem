@@ -28,4 +28,16 @@ public class BranchService {
     public Branch getOne(int branchId) {
         return branchRepository.getOne(branchId);
     }
+
+    public int getCount() {
+        return Math.toIntExact(branchRepository.count());
+    }
+
+    public int getBranchSendTransactionsCount(int myBranchId) {
+         return branchRepository.getOne(myBranchId).getSentTransactions().size();
+    }
+
+    public int getBranchReceiveTransactionsCount(int myBranchId) {
+        return branchRepository.getOne(myBranchId).getReceivedTransactions().size();
+    }
 }

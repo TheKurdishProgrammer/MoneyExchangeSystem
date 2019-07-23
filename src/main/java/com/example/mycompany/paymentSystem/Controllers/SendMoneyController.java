@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("/send")
 public class SendMoneyController {
 
-    public final static int MY_BRACH_ID = 1;
+    public final static int MY_BRANCH_ID = 4;
 
     @Autowired
     private BranchService branchService;
@@ -37,7 +37,7 @@ public class SendMoneyController {
     @RequestMapping(value = {"/", ""})
     public String index(Model model) {
 
-        List<Branch> branches = branchService.getBranchesExcept(MY_BRACH_ID);
+        List<Branch> branches = branchService.getBranchesExcept(MY_BRANCH_ID);
 
 
 
@@ -76,7 +76,7 @@ public class SendMoneyController {
 
         //retrieving both branches
         Branch toBranch = branchService.getOne(branchId);
-        Branch fromBranch = branchService.getOne(MY_BRACH_ID);
+        Branch fromBranch = branchService.getOne(MY_BRANCH_ID);
 
 
         transaction.setToBranch(toBranch);

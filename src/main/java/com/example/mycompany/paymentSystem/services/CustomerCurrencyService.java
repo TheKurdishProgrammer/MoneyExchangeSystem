@@ -21,5 +21,20 @@ public class CustomerCurrencyService {
     }
 
 
+    public void transferMoney(CustomerCurrency boxFrom, CustomerCurrency boxTo, double amount) {
+        double fromSum = boxFrom.getSum();
+        double toSum = boxTo.getSum();
 
+        fromSum = fromSum - amount;
+        //save the subtracted from the source box
+        boxFrom.setSum(fromSum);
+
+        toSum = toSum + amount;
+        //save the added to the des. box
+        boxTo.setSum(toSum);
+
+        this.save(boxFrom);
+        this.save(boxTo);
+
+    }
 }

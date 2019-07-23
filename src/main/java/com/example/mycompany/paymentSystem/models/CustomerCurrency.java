@@ -44,4 +44,10 @@ public class CustomerCurrency {
     @OneToMany(mappedBy = "customerCurrency",fetch = FetchType.LAZY)
     private List<Withdraw> withdraws;
 
-    }
+
+
+    @OneToMany(mappedBy = "customerCurrency",fetch = FetchType.LAZY)
+    private List<Transfer> transfers;
+
+
+}

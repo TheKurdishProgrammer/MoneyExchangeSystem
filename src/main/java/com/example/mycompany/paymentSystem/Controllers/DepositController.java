@@ -82,8 +82,7 @@ public class DepositController {
                 2- if has, then let the browser go,
                 3-if no has, then just preventDefault and the alert message is good to go :)
              */
-            model.addAttribute("success",false);
-            return "{\"success\":\"false\"}";
+             return "{\"success\":\"false\"}";
         } else {
 //            deposit.set(customer.get());
             //it goes here
