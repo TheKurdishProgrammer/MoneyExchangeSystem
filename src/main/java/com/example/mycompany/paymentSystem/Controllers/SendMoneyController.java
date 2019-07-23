@@ -5,6 +5,7 @@ import com.example.mycompany.paymentSystem.models.Branch;
 import com.example.mycompany.paymentSystem.models.Transaction;
 import com.example.mycompany.paymentSystem.services.BranchService;
 import com.example.mycompany.paymentSystem.services.CurrencyService;
+import com.example.mycompany.paymentSystem.services.CustomerService;
 import com.example.mycompany.paymentSystem.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,9 @@ public class SendMoneyController {
     @Autowired
     private CurrencyService currencyService;
 
+    @Autowired
+    private CustomerService customerService;
+
 
 
 
@@ -40,10 +44,9 @@ public class SendMoneyController {
         List<Branch> branches = branchService.getBranchesExcept(MY_BRANCH_ID);
 
 
-
         model.addAttribute("branches", branches);
         model.addAttribute("currencies", currencyService.getCurrencies());
-
+        model.addAttribute("customers",customerService.getCustomers());
         return "send";
 
     }
@@ -51,6 +54,7 @@ public class SendMoneyController {
     @PostMapping(value = {"/", ""})
     public String sendMoney(HttpServletRequest request, Transaction transaction, BindingResult result) {
 
+        int x = 1;
 
         /*
 
@@ -70,6 +74,7 @@ public class SendMoneyController {
 
 
         int branchId = Integer.parseInt(request.getParameter("id"));
+        String sender = request.getParameter("senderName");
 
 //        transactionService.save(transaction);
 

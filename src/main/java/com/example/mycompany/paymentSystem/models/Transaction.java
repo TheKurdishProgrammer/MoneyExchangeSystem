@@ -22,7 +22,7 @@ public class Transaction {
 
 
     private String receiverName;
-    private long receiverPhoneNumber;
+    private String receiverPhoneNumber;
 
     private String notes;
 

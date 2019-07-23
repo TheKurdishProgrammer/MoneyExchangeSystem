@@ -2,6 +2,49 @@
 <html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <title>Spring Boot Thymeleaf + Spring Security</title>
+
+    <script type="text/javascript">
+
+        var linguJSON = {
+            "languages": [
+                {
+                    "lang_name": "English",
+                    "lang_code": "en",
+                    "url_pattern": "?"
+                },
+                {
+                    "lang_name": "كوردی",
+                    "lang_code": "ku",
+                    "url_pattern": "?"
+                },
+                {
+                    "lang_name": "عربی",
+                    "lang_code": "ar",
+                    "url_pattern": "?"
+                }
+            ],
+            "translated_segments": [
+                {
+                    "source": "Customers",
+                    "target_ku":"كڕایرەكان" ,
+                    "target_ar": "موشتەریەكان"
+                },{
+                    "source": "Home",
+                    "target_ku":"ماڵەوە" ,
+                    "target_ar": "البیت"
+                }
+
+
+            ]
+        };
+
+    </script>
+    <style>
+        #lingumania_langswitcher{
+            margin: 20px 100px;
+        }
+    </style>
+
 </head>
 <body>
 

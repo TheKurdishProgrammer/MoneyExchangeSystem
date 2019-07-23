@@ -21,6 +21,7 @@
         //todo to external file
         $(document).ready(function () {
 
+            $('#transaction_details').hide();
 
             $("#getTransaction").on('click', function (e) {
                 e.preventDefault();
@@ -36,6 +37,7 @@
                     $('#receivingCurrency').html(data.receivingCurrency);
                     $('#receivedAmount').html(data.receivedMoney);
 
+                    $('#transaction_details').show();
 
                 });
 
@@ -116,7 +118,7 @@
 
         <br/>
 
-        <div class="row">
+        <div id="transaction_details" class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
@@ -197,21 +199,23 @@
                 </div>
             </div>
 
+
         </div>
 
 
-        <div th:replace="fragments/footer :: footer"></div>
-
-
     </div>
+    <div th:replace="fragments/footer :: footer"></div>
 
 
-    <script>
-
-        var sig = $('#sig').signature();
+</div>
 
 
-    </script>
+<script>
+
+    var sig = $('#sig').signature();
+
+
+</script>
 
 </body>
 

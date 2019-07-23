@@ -26,12 +26,12 @@
 <div id="main-wrapper">
     <!--header.html  that's here  -->
 
-        <div class="preloader">
-            <div class="lds-ripple">
-                <div class="lds-pos"></div>
-                <div class="lds-pos"></div>
-            </div>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
         </div>
+    </div>
 
     <div th:replace="fragments/header :: header"></div>
 
@@ -71,7 +71,28 @@
 <script src="/libs/moment/min/moment.min.js"></script>
 <script src="/libs/fullcalendar/dist/fullcalendar.min.js"></script>
 <script src="/js/pages/calendar/cal-init.js"></script>
+<script src="http://www.lingumania.com/demos/js/lingumania.min.js"></script>
 
+<script>
+
+    $(document).ready(function () {
+        $('.sidebar-item').on('click', function () {
+
+
+            var testimonialElements = $(".sidebar-item");
+            for (var i = 0; i < testimonialElements.length; i++) {
+                var element = testimonialElements.eq(i);
+                //do something with element
+                console.log("hello "+i);
+                element.removeClass('selected');
+
+            }
+
+
+        });
+    });
+
+</script>
 
 </body>
 

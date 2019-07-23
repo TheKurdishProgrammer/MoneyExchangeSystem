@@ -32,7 +32,7 @@ public class Customer {
 
 
     //todo is phone number should be string or long?
-    private long phoneNumber;
+    private String phoneNumber;
 
 //    @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer",fetch = FetchType.LAZY)
 //    private List<Deposit> deposits;

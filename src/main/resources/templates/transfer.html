@@ -49,125 +49,129 @@
 <div layout:fragment="content">
 
 
-        <div class="page-breadcrumb">
-            <div class="row">
-                <div class="col-12 d-flex no-block align-items-center">
-                    <h4 class="page-title">Transfer Money </h4>
-                    <div class="ml-auto text-right">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Finance</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Transfer</li>
-                            </ol>
-                        </nav>
-                    </div>
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Transfer Money </h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Finance</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Transfer</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
         </div>
+    </div>
 
 
+    <div class="container-fluid">
 
-        <div class="container-fluid">
-
-            <form action="/transfer/" id="transfer_form" method="post" enctype="multipart/form-data">
-                <div class="form-row">
-                    <div class="col">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="FromCustomerIG"><i class="fas fa-money-check-alt" aria-hidden="true"></i></span>
-                            </div>
-
-                            <input list="from_customer_names" class="form-control" id="fromCustomerInput" name="cusID_from" aria-describedby="FromCustomerIG"/>
-                            <datalist id="from_customer_names">
-                                <option th:each="customer : ${customers}" th:value="${customer.id}" th:label="${customer.name}">
-                            </datalist>
+        <form action="/transfer/" id="transfer_form" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="FromCustomerIG"><i class="fas fa-money-check-alt"
+                                                                                  aria-hidden="true"></i></span>
                         </div>
-                    </div>
 
-                    <div class="col-0 text-center" style="padding: 5px;">
-                        <i style="font-size: 20px;" class="fas fa-arrow-right" aria-hidden="true"></i>
+                        <input list="from_customer_names" class="form-control" id="fromCustomerInput" name="cusID_from"
+                               aria-describedby="FromCustomerIG"/>
+                        <datalist id="from_customer_names">
+                            <option th:each="customer : ${customers}" th:value="${customer.id}"
+                                    th:label="${customer.name}">
+                        </datalist>
                     </div>
-                    <div class="col">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="ToCustomerIG"><i class="fas fa-dollar-sign" aria-hidden="true"></i></span>
-                            </div>
-
-                            <input list="to_customer_names" class="form-control" id="ToCustomerInput" name="cusID_to" aria-describedby="ToCustomerInput"/>
-                            <datalist id="to_customer_names">
-                                <option th:each="customer : ${customers}" th:value="${customer.id}" th:label="${customer.name}">
-                            </datalist>                        </div>
-                    </div>
-
                 </div>
-                <br>
 
-                <div class="form-row">
-                    <div class="col">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="AmountIG"><i class="fas fa-money-check-alt" aria-hidden="true"></i></span>
-                            </div>
-                            <input type="text" class="form-control" id="amount" name="amount" placeholder="Amount" aria-describedby="AmountIG" required="">
-
+                <div class="col-0 text-center" style="padding: 5px;">
+                    <i style="font-size: 20px;" class="fas fa-arrow-right" aria-hidden="true"></i>
+                </div>
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="ToCustomerIG"><i class="fas fa-dollar-sign"
+                                                                                aria-hidden="true"></i></span>
                         </div>
+
+                        <input list="to_customer_names" class="form-control" id="ToCustomerInput" name="cusID_to"
+                               aria-describedby="ToCustomerInput"/>
+                        <datalist id="to_customer_names">
+                            <option th:each="customer : ${customers}" th:value="${customer.id}"
+                                    th:label="${customer.name}">
+                        </datalist>
                     </div>
-                    <div class="col">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="currencyIG"><i class="fas fa-dollar-sign" aria-hidden="true"></i></span>
-                            </div>
-
-                            <select aria-describedby="inputGroupPrepend" required="" th:name="curID" th:id="curID"
-                                    class="form-control">
-                                <option selected value="">Sending Currency</option>
-                                <option th:each="currency : ${currencies}"
-                                        th:value="${currency.id}"
-                                        th:utext="${currency.currency}"></option>
-                                <!--                                    th:value="${currency.id}"-->
-
-                            </select>
-
-
-                        </div>
-                    </div>
-
                 </div>
-
-
-
-                <br>
-
-
-                <button id="transferMoney" type="submit" class="btn btn-success"><i class="far fa-credit-card" aria-hidden="true"></i> Transfer Money</button>
-            </form>
-            <br/>
-            <div class="row">
-
-
-                <div hidden="hidden" class="alert alert-danger alert-dismissible" role="alert">
-                    <strong>Could not deposit!</strong>
-                    Customer no have box for such currency
-                </div>
-
-                <div hidden="hidden" class="alert alert-success  alert-dismissible" role="alert">
-                    <strong>Money Deposited!</strong>
-                    Please see the Deposit Invoice
-                </div>
-
 
             </div>
+            <br>
+
+            <div class="form-row">
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="AmountIG"><i class="fas fa-money-check-alt"
+                                                                            aria-hidden="true"></i></span>
+                        </div>
+                        <input type="number" class="form-control" id="amount" name="amount" placeholder="Amount"
+                               aria-describedby="AmountIG" required="">
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="currencyIG"><i class="fas fa-dollar-sign"
+                                                                              aria-hidden="true"></i></span>
+                        </div>
+
+                        <select aria-describedby="inputGroupPrepend" required="" th:name="curID" th:id="curID"
+                                class="form-control">
+                            <option selected value="">Sending Currency</option>
+                            <option th:each="currency : ${currencies}"
+                                    th:value="${currency.id}"
+                                    th:utext="${currency.currency}"></option>
+                            <!--                                    th:value="${currency.id}"-->
+
+                        </select>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <br>
+
+
+            <button id="transferMoney" type="submit" class="btn btn-success"><i class="far fa-credit-card"
+                                                                                aria-hidden="true"></i> Transfer Money
+            </button>
+        </form>
+        <br/>
+        <div class="row">
+
+
+            <div hidden="hidden" class="alert alert-danger alert-dismissible" role="alert">
+                <strong>Could not Transfer!</strong>
+                Customer no have box for such currency
+            </div>
+
+            <div hidden="hidden" class="alert alert-success  alert-dismissible" role="alert">
+                <strong>Money Transferred!</strong>
+                Please see the Transfer Invoice
+            </div>
+
+
         </div>
+    </div>
 
 
-
-
-
-
-    <div th:replace="fragments/footer :: footer" ></div>
-
-
+    <div th:replace="fragments/footer :: footer"></div>
 
 
 </div>

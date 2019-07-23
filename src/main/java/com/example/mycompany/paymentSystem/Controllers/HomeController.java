@@ -94,17 +94,17 @@ public class HomeController {
         Customer c1 = new Customer();
         c1.setName("Mohammed");
         c1.setAddress("Iskan");
-        c1.setPhoneNumber(750352730);
+        c1.setPhoneNumber("07503527330");
 
         Customer c2 = new Customer();
         c2.setName("Zhyar");
         c2.setAddress("Iskan");
-        c2.setPhoneNumber(750352330);
+        c2.setPhoneNumber("07503527330");
 
         Customer c3 = new Customer();
         c3.setName("Karzan");
         c3.setAddress("Iskan");
-        c3.setPhoneNumber(750357330);
+        c3.setPhoneNumber("07503527330");
 
 
         ///adding the customer boxes
