@@ -1,6 +1,5 @@
 package com.example.mycompany.paymentSystem.models;
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,7 +22,6 @@ public class Transaction {
 
     private String receiverName;
     private String receiverPhoneNumber;
-
     private String notes;
 
     private Date date;

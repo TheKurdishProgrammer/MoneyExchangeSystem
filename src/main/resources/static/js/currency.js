@@ -10,7 +10,7 @@ $(document).ready(function() {
        var sendingAmount = $("#sendingAmount").val();
 
 
-        console.log("got the values");
+        console.log(receivingCurrency + "\n"+sendingCurrency);
 
         convertCurrency(sendingAmount, sendingCurrency, receivingCurrency, function (err, amount) {
             $('#receivedMoney').attr("placeholder","Received Money: "+amount);
