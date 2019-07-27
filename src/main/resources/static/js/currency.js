@@ -1,14 +1,41 @@
 $(document).ready(function() {
 
 
+    $('#exchangeRate').on('input',function (e) {
+
+        var value = $('#exchangeRate').val();
+        var sendingAmount = $("#sendingAmount").val();
+        console.log(value+"  "+ sendingAmount);
+
+        currencyConverter(value,sendingAmount,function (err,amount) {
+            $('#receivedMoney').attr("placeholder","Received Money: "+amount);
+
+        });
+
+    });
+
 
     $("#receivingCurrency").on('change',function () {
 
        var receivingCurrency = $(this).children("option").filter(":selected").text();
        var sendingCurrency = $("#sendingCurrency").children("option").filter(":selected").text();
 
-       var sendingAmount = $("#sendingAmount").val();
+       if (receivingCurrency === sendingCurrency)
+       {
 
+           $('#exchangeRate').prop("disabled",true);
+
+           $('#receivedMoney').val($('#sendingAmount').val());
+
+           return;
+       }
+
+
+        $('#exchangeRate').prop("disabled",false);
+
+
+
+        var sendingAmount = $("#sendingAmount").val();
 
         console.log(receivingCurrency + "\n"+sendingCurrency);
 
@@ -22,6 +49,20 @@ $(document).ready(function() {
 });
 
 
+
+function currencyConverter(val,amount,cb) {
+
+    if (val) {
+        var total = val * amount;
+        console.log(total);
+
+        cb(null, Math.round(total * 100) / 100);
+    } else {
+        var err = new Error("Value not found for " + query);
+        console.log(err);
+        cb(err);
+    }
+}
 
 function convertCurrency(amount, fromCurrency, toCurrency, cb) {
     var apiKey = '8bcbf013bc01bdd1bc96';
@@ -46,15 +87,7 @@ function convertCurrency(amount, fromCurrency, toCurrency, cb) {
         $('#exchangeRate').attr("placeholder","Exchange Rate : "+val);
 
 
-                 if (val) {
-                     var total = val * amount;
-                     console.log(total);
+        currencyConverter(val,amount,cb);
 
-                     cb(null, Math.round(total * 100) / 100);
-                 } else {
-                     var err = new Error("Value not found for " + query);
-                     console.log(err);
-                     cb(err);
-                 }
      });
 }

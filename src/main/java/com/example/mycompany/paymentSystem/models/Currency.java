@@ -28,7 +28,7 @@ public class Currency {
     @Column(length = 3)
     private String currency;
 
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "currency")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "currency")
     private List<CustomerCurrency> customerCurrencies;
 
 }

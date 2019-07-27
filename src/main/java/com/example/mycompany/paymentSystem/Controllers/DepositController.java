@@ -58,10 +58,6 @@ public class DepositController {
     @ResponseBody
     public String deposit(HttpServletRequest request, HttpServletResponse response, Deposit deposit,Model model) throws IOException {
 
-
-
-
-
         // using the customerId and currency ID retrieve the customerCurrency,
         // then add it with the deposit
         int customerId = Integer.parseInt(request.getParameter("cusID"));

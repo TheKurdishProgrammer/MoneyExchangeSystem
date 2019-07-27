@@ -21,12 +21,11 @@ import static com.example.mycompany.paymentSystem.Controllers.SendMoneyControlle
 
 
 @Controller
-@RequestMapping(value = {"/", "/home"})
+@RequestMapping(value = {"","/", "/home"})
 
 public class HomeController {
 
-
-    private int counter = 1;
+    private int counter = 2;
 
     @Autowired
     private BranchService branchService;

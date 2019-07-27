@@ -1,5 +1,6 @@
 package com.example.mycompany.paymentSystem.models;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
@@ -10,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Data
-@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "user")
 public class User {

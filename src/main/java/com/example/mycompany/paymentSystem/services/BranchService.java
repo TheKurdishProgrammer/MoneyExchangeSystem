@@ -40,4 +40,9 @@ public class BranchService {
     public int getBranchReceiveTransactionsCount(int myBranchId) {
         return branchRepository.getOne(myBranchId).getReceivedTransactions().size();
     }
+
+    public List<Branch> getBranches() {
+
+       return branchRepository.findAll();
+    }
 }
