@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script src="/js/currency.js">
+    </script>
+
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Receive Money</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Receive</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+
+
+        <form action="/receive/different/" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-map-marker-alt"
+                                                                  aria-hidden="true"></i></span>
+                        </div>
+
+
+                        <select aria-describedby="inputGroupPrepend" required="" id="branch" class="form-control"
+                                name="id">
+                            <option selected disabled value="">To Branch</option>
+                            <option th:each="branch : ${branches}"
+                                    th:value="${branch.id}"
+                                    th:utext="${branch.name}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-money-check-alt"
+                                                                  aria-hidden="true"></i></span>
+                        </div>
+                        <input id="sendingAmount" name="sendingAmount" type="text" class="form-control"
+                               placeholder="Sending Amount" aria-describedby="inputGroupPrepend" required="">
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-dollar-sign"
+                                                                  aria-hidden="true"></i></span>
+                        </div>
+                        <select aria-describedby="inputGroupPrepend" required="" th:name="sendingCurrency"
+                                id="sendingCurrency" class="form-control"
+                        >
+                            <option selected value="">Sending Currency</option>
+                            <option th:each="currency : ${currencies}"
+                                    th:value="${currency.currency}"
+                                    th:utext="${currency.currency}"></option>
+                            <!--                                    th:value="${currency.id}"-->
+
+                        </select>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!--            end branch and amount-->
+            <br/>
+
+            <div class="form-row">
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"
+                                                                  aria-hidden="true"></i></span>
+                        </div>
+                        <input name="receiverName" id="receiverName" type="text" class="form-control"
+                               placeholder="Receiver Name" aria-describedby="inputGroupPrepend" required="">
+                    </div>
+                </div>
+
+
+                <div class="col">
+
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-hashtag"
+                                                          aria-hidden="true"></i></span>
+                        </div>
+                        <input name="receiverPhoneNumber" class="form-control" placeholder="Receiver Phone Number"
+                               aria-describedby="inputGroupPrepend" required="">
+
+                    </div>
+                </div>
+
+                <div class="col">
+
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-address-book"
+                                                          aria-hidden="true"></i></span>
+                        </div>
+                        <input name="receiverAddress" class="form-control" placeholder="Receiver Address"
+                               aria-describedby="inputGroupPrepend" required="">
+
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+
+
+
+
+
+            <br>
+
+
+            <button type="submit" class="btn btn-success"><i class="fas fa-credit-card" aria-hidden="true"></i>
+                &nbsp;&nbsp;Send Money
+            </button>
+        </form>
+
+
+    </div>
+
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+
+</div>
+
+
+</body>
+
+</html>
+<!--    <div class="preloader">-->
+<!--        <div class="lds-ripple">-->
+<!--            <div class="lds-pos"></div>-->
+<!--            <div class="lds-pos"></div>-->
+<!--        </div>-->
+<!--    </div>-->

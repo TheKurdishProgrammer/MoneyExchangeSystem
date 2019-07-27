@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml"       xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>Branhces</title>
+
+
+
+</head>
+<body>
+
+<div layout:fragment="content">
+
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Branches</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Branches</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+
+
+        <br>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="bg-cyan p-10 text-white text-center">
+                    <i class="fa fa-user m-b-5 font-16" aria-hidden="true"></i>
+                    <h5 id="branches_number" class="m-b-0 m-t-5">2540</h5>
+                    <small class="font-light">Total Branches</small>
+                </div>
+            </div>
+            <div class="col-6 card-hover">
+                <div class="bg-dark p-10 text-white text-center" data-toggle="modal" data-target="#Modal2">
+                    <i class="fa fa-plus m-b-5 font-16" aria-hidden="true"></i>
+                    <h5 class="m-b-0 m-t-5">Add</h5>
+                    <small class="font-light">New Branch</small>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="addNewBranchModal"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="padding: 20px;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addNewBranchModal">Add New Branch</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+
+                    </div>
+
+                    <br>
+                    <form action="/branches/" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="branchName">Branch Name</label>
+                            <input type="text" name="name" class="form-control" id="branchName"
+                                   placeholder="Branch Name">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="branchAddress">Branch Address</label>
+                            <input type="text" class="form-control" name="address" id="branchAddress"
+                                    placeholder="Address">
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="phoneNumber">Branch Phone Number</label>
+                            <input type="number" name="phoneNumber" class="form-control" id="phoneNumber"
+                                   aria-describedby="emailHelp" placeholder="#Phone Number">
+                        </div>
+
+
+<!--                        <H6>-->
+<!--                            Please Select The Corresponding Currencies For the Supplier-->
+<!--                        </H6>-->
+
+<!--                        <div class="form-check">-->
+<!--                            <label class="form-check-label" for="check1">-->
+<!--                                <input type="checkbox" class="form-check-input" id="check1" name="option1"-->
+<!--                                       value="something" checked>Option 1-->
+<!--                            </label>-->
+<!--                        </div>-->
+
+
+                        <br>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Create Branch</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                    </div>
+
+                    <div id="customers_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6"></div>
+                            <div class="col-sm-12 col-md-6">
+                                <div id="customers_filter" class="dataTables_filter">
+
+                                    <label class="col-10">Search:<input type="search"
+                                                                        class="form-control form-control-sm"
+                                                                        placeholder=""
+                                                                        aria-controls="customers"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="customers" class="table dataTable no-footer" role="grid">
+                                    <thead class="thead-light">
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="branches" rowspan="1"
+                                            colspan="1" aria-sort="ascending"
+                                            aria-label="ID: activate to sort column descending" style="width: 14px;">ID
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="branches" rowspan="1"
+                                            colspan="1" aria-label="Name: activate to sort column ascending"
+                                            style="width: 38px;"><b>Name</b></th>
+                                        <th class="sorting" tabindex="0" aria-controls="branches" rowspan="1"
+                                            colspan="1" aria-label="Phone: activate to sort column ascending"
+                                            style="width: 92.667px;"><b>Phone</b></th>
+                                        <th class="sorting" tabindex="0" aria-controls="branches" rowspan="1"
+                                            colspan="1" aria-label="Address: activate to sort column ascending"
+                                            style="width: 131.333px;"><b>Address</b></th>
+
+                                        <th class="sorting" tabindex="0" aria-controls="customers" rowspan="1"
+                                            colspan="1" aria-label="Actions: activate to sort column ascending"
+                                            style="width: 110px;"><b>Actions</b></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody th:each="branch : ${branches}" th:remove="tag">
+
+
+
+                                    <tr role="row" class="even">
+                                        <td th:text="${branch.id}" class="sorting_1"></td>
+                                        <td th:text="${branch.name}" class="sorting_1"></td>
+                                        <td th:text="${branch.phoneNumber}" class="sorting_1"></td>
+                                        <td th:text="${branch.address}" class="sorting_1"></td>
+
+
+                                        <td class="d-flex justify-content-center" style="">
+                                            <button style="margin-top:-7px;" type="submit" class="btn btn-success"><i
+                                                    class="fas fa-search" aria-hidden="true"></i></button>
+                                            <button style="margin-top:-7px;" type="submit" class="btn btn-warning"><i
+                                                    class="fas fa-user-edit" aria-hidden="true"></i></button>
+                                            <button style="margin-top:-7px;" type="submit" class="btn btn-danger"><i
+                                                    class="fas fa-user-minus" aria-hidden="true"></i></button>
+                                        </td>
+                                    </tr>
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5"></div>
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="customers_paginate">
+                                    <ul class="pagination">
+                                        <li class="paginate_button page-item previous disabled" id="customers_previous">
+                                            <a href="#" aria-controls="customers" data-dt-idx="0" tabindex="0"
+                                               class="page-link">Previous</a></li>
+                                        <li class="paginate_button page-item active"><a href="#"
+                                                                                        aria-controls="customers"
+                                                                                        data-dt-idx="1" tabindex="0"
+                                                                                        class="page-link">1</a></li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="customers"
+                                                                                  data-dt-idx="2" tabindex="0"
+                                                                                  class="page-link">2</a></li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="customers"
+                                                                                  data-dt-idx="3" tabindex="0"
+                                                                                  class="page-link">3</a></li>
+                                        <li class="paginate_button page-item next" id="customers_next"><a href="#"
+                                                                                                          aria-controls="customers"
+                                                                                                          data-dt-idx="4"
+                                                                                                          tabindex="0"
+                                                                                                          class="page-link">Next</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+
+</div>
+
+</body>
+
+</html>
+<!--    <div class="preloader">-->
+<!--        <div class="lds-ripple">-->
+<!--            <div class="lds-pos"></div>-->
+<!--            <div class="lds-pos"></div>-->
+<!--        </div>-->
+<!--    </div>-->
