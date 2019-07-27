@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,6 +23,13 @@ public class Branch {
 
     private String address;
 
+
+    @OneToOne(mappedBy = "branch")
+    private User user;
+
+
+
+
     @Override
     public String toString() {
         return "Branch{" +
@@ -32,9 +40,22 @@ public class Branch {
                 '}';
     }
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "fromBranch",fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fromBranch", fetch = FetchType.LAZY)
     private List<Transaction> sentTransactions;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "toBranch",fetch = FetchType.LAZY)
+    public List<Transaction> getSentTransactions() {
+
+        return sentTransactions == null ? new ArrayList<>() : sentTransactions;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "toBranch", fetch = FetchType.LAZY)
     private List<Transaction> receivedTransactions;
+
+    public List<Transaction> getReceivedTransactions() {
+        return receivedTransactions == null ? new ArrayList<>() : receivedTransactions;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "receivingBranch",fetch = FetchType.LAZY)
+    private List<Receive> receivedMoneys;
+
 }

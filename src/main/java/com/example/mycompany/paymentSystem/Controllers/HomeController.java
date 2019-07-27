@@ -1,14 +1,8 @@
 package com.example.mycompany.paymentSystem.Controllers;
 
 
-import com.example.mycompany.paymentSystem.models.Branch;
-import com.example.mycompany.paymentSystem.models.Currency;
-import com.example.mycompany.paymentSystem.models.Customer;
-import com.example.mycompany.paymentSystem.models.CustomerCurrency;
-import com.example.mycompany.paymentSystem.services.BranchService;
-import com.example.mycompany.paymentSystem.services.CurrencyService;
-import com.example.mycompany.paymentSystem.services.CustomerCurrencyService;
-import com.example.mycompany.paymentSystem.services.CustomerService;
+import com.example.mycompany.paymentSystem.models.*;
+import com.example.mycompany.paymentSystem.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +30,9 @@ public class HomeController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private ReceiveMoneyServices receiveMoneyServices;
+
 
     @Autowired
     private CustomerCurrencyService customerCurrencyService;
@@ -49,13 +46,33 @@ public class HomeController {
             counter++;
         }
 
+
+
+        long s1 = System.currentTimeMillis();
+        List<Receive> branches1 = branchService.getOne(MY_BRANCH_ID).getReceivedMoneys();
+        long f1 = System.currentTimeMillis();
+
+        System.out.println(f1-s1);
+
+
+        long s2 = System.currentTimeMillis();
+        List<Receive> branches2 = receiveMoneyServices.getBranchReceives(MY_BRANCH_ID);
+
+        long f2 = System.currentTimeMillis();
+
+        System.out.println(f2-s2);
+
         int  branchCount = branchService.getCount();
         int sentTransCount = branchService.getBranchSendTransactionsCount(MY_BRANCH_ID);
         int receievedTransCount = branchService.getBranchReceiveTransactionsCount(MY_BRANCH_ID);
+        receievedTransCount = receievedTransCount + branchService.getReceivedMoneyCount(MY_BRANCH_ID);
 
         model.addAttribute("branchCount",branchCount);
         model.addAttribute("branchSendTransactionsCount",sentTransCount);
         model.addAttribute("branchReceiveTransactionsCount",receievedTransCount);
+
+
+
 
 
         return "dashboard";
@@ -140,6 +157,8 @@ public class HomeController {
         customerCurrencyService.save(box3);
 
     }
+
+
 
 
 }

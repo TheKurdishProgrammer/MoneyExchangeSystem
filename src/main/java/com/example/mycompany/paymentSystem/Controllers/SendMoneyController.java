@@ -7,6 +7,7 @@ import com.example.mycompany.paymentSystem.services.BranchService;
 import com.example.mycompany.paymentSystem.services.CurrencyService;
 import com.example.mycompany.paymentSystem.services.CustomerService;
 import com.example.mycompany.paymentSystem.services.TransactionService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,8 +37,6 @@ public class SendMoneyController {
     private CustomerService customerService;
 
 
-
-
     @RequestMapping(value = {"/", ""})
     public String index(Model model) {
 
@@ -46,37 +45,20 @@ public class SendMoneyController {
 
         model.addAttribute("branches", branches);
         model.addAttribute("currencies", currencyService.getCurrencies());
-        model.addAttribute("customers",customerService.getCustomers());
+        model.addAttribute("customers", customerService.getCustomers());
         return "send";
 
     }
 
     @PostMapping(value = {"/", ""})
     public String sendMoney(HttpServletRequest request, Transaction transaction, BindingResult result) {
-
-        int x = 1;
-
-        /*
-
-                1- date
-                2-sending and receiving currency
-                3-received money
-         */
         if (result.hasErrors()) {
             for (ObjectError allError : result.getAllErrors())
                 System.out.println(allError.getDefaultMessage());
             return "send";
         }
 
-//        Enumeration names = request.getParameterNames();
-//        while (names.hasMoreElements())
-//            System.out.println(names.nextElement().toString());
-
-
         int branchId = Integer.parseInt(request.getParameter("id"));
-        String sender = request.getParameter("senderName");
-
-//        transactionService.save(transaction);
 
 
         //retrieving both branches
@@ -86,7 +68,6 @@ public class SendMoneyController {
 
         transaction.setToBranch(toBranch);
         transaction.setFromBranch(fromBranch);
-
 
         transactionService.save(transaction);
 

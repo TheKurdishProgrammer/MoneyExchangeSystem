@@ -27,4 +27,8 @@ public class CurrencyService {
     public List<Currency> saveAll(List<Currency> currencies) {
         return currencyRepository.saveAll(currencies);
     }
+
+    public Currency getOne(int curId) {
+        return currencyRepository.getOne(curId);
+    }
 }

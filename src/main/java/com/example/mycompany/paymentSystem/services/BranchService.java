@@ -1,7 +1,9 @@
 package com.example.mycompany.paymentSystem.services;
 
 import com.example.mycompany.paymentSystem.models.Branch;
+import com.example.mycompany.paymentSystem.models.Receive;
 import com.example.mycompany.paymentSystem.repositories.BranchRepository;
+import com.example.mycompany.paymentSystem.repositories.ReceiveMoneyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class BranchService {
 
     @Autowired
     private BranchRepository branchRepository;
+
+
+    @Autowired
+    private ReceiveMoneyRepository receiveRepository;
 
      public Branch save(Branch branch) {
         return branchRepository.save(branch);
@@ -34,7 +40,9 @@ public class BranchService {
     }
 
     public int getBranchSendTransactionsCount(int myBranchId) {
-         return branchRepository.getOne(myBranchId).getSentTransactions().size();
+
+         return
+                 branchRepository.getOne(myBranchId).getSentTransactions().size();
     }
 
     public int getBranchReceiveTransactionsCount(int myBranchId) {
@@ -44,5 +52,9 @@ public class BranchService {
     public List<Branch> getBranches() {
 
        return branchRepository.findAll();
+    }
+
+    public int getReceivedMoneyCount(int myBranchId) {
+        return receiveRepository.countByBranch(myBranchId);
     }
 }

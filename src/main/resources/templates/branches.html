@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml"       xmlns:th="http://www.thymeleaf.org"
+<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
 >
 <head>
     <title>Branhces</title>
@@ -38,7 +39,7 @@
             <div class="col-6">
                 <div class="bg-cyan p-10 text-white text-center">
                     <i class="fa fa-user m-b-5 font-16" aria-hidden="true"></i>
-                    <h5 id="branches_number" class="m-b-0 m-t-5">2540</h5>
+                    <h5 th:text="${branches.size()}" id="branches_number" class="m-b-0 m-t-5">2540</h5>
                     <small class="font-light">Total Branches</small>
                 </div>
             </div>

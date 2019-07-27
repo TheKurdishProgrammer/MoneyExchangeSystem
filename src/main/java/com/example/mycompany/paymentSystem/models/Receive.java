@@ -20,7 +20,9 @@ public class Receive {
 
     private double amount;
 
-    private String address;
+    private String receiverAddress;
+
+    private String receiverPhoneNumber;
 
 
 
@@ -28,5 +30,13 @@ public class Receive {
     @JoinColumn
     private Currency currency;
 
+    @ManyToOne
+    @JoinColumn
+    private Branch sendingBranch;
+
+
+    @ManyToOne
+    @JoinColumn
+    private Branch receivingBranch;
 
 }

@@ -39,4 +39,8 @@ public class Customer {
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer",fetch=FetchType.LAZY)
     private List<CustomerCurrency> customerCurrencies;
+
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "senderCustomer",fetch=FetchType.LAZY)
+    private List<Transaction> transactions;
 }

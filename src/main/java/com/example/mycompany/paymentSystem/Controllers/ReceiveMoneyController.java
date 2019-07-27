@@ -8,15 +8,20 @@ import com.example.mycompany.paymentSystem.models.Receive;
 import com.example.mycompany.paymentSystem.models.Transaction;
 import com.example.mycompany.paymentSystem.services.BranchService;
 import com.example.mycompany.paymentSystem.services.CurrencyService;
+import com.example.mycompany.paymentSystem.services.ReceiveMoneyServices;
 import com.example.mycompany.paymentSystem.services.TransactionService;
+import org.apache.commons.lang.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
+
+import static com.example.mycompany.paymentSystem.Controllers.SendMoneyController.MY_BRANCH_ID;
 
 @Controller
 @RequestMapping("/receive")
@@ -32,38 +37,44 @@ public class ReceiveMoneyController {
     @Autowired
     private BranchService branchService;
 
+    @Autowired
+    private ReceiveMoneyServices receiveServices;
 
-    @RequestMapping(value = {"","/same/", "/same"})
+
+    @RequestMapping(value = {"", "/same/", "/same"})
     public String indexSame() {
 
         return "receive";
     }
 
 
-
     @RequestMapping(value = {"/different/", "/different"})
     public String indexDifferent(Model model) {
 
-        List<Branch> branches = branchService.getBranches(); //get all
+        List<Branch> branches = branchService.getBranchesExcept(MY_BRANCH_ID); //get all
         List<Currency> currencies = currencyService.getCurrencies(); //get all
 
-        model.addAttribute("currencies",currencies);
-        model.addAttribute("branches",branches);
+        model.addAttribute("currencies", currencies);
+        model.addAttribute("branches", branches);
 
         return "receive_different";
     }
-
 
 
     @RequestMapping(value = {"/transactions/{trName}", ""})
     @ResponseBody
     public TransactionDto receiveMoney(@PathVariable(value = "trName") String searchQuery) {
 
-        Optional<Transaction> transaction = transactionService.findById(searchQuery);
 
-        TransactionDto transactionDto = new ModelMapper().map(transaction.orElseGet(Transaction::new),TransactionDto.class);
+        boolean isNumeric = StringUtils.isNumeric(searchQuery);
+        Optional<Transaction> transaction;
 
+        if (isNumeric)
+            transaction = transactionService.findById(searchQuery);
+        else
+            transaction = transactionService.findByName(searchQuery);
 
+        TransactionDto transactionDto = new ModelMapper().map(transaction.orElseGet(Transaction::new), TransactionDto.class);
 
 
         //do the not found logic
@@ -75,9 +86,9 @@ public class ReceiveMoneyController {
     }
 
 
-    @RequestMapping(value = {"/transactions/approve","/transactions/approve/"})
+    @RequestMapping(value = {"/transactions/approve", "/transactions/approve/"})
     @ResponseBody
-    public String approveTransaction(@RequestParam(value = "trNum") String trNum){
+    public String approveTransaction(@RequestParam(value = "trNum") String trNum) {
 
 
         // make sure approve is fulfilled
@@ -91,19 +102,36 @@ public class ReceiveMoneyController {
 
     @PostMapping(value = {"/different/", "/different"})
     @ResponseBody
-    public String saveReceivedTransaction(Receive receive){
+    public String saveReceivedTransaction(Receive receive, HttpServletRequest request) {
 
 
         // make sure approve is fulfilled
+
 //        transactionService.approve(trNum);
+
+
+        int curId = Integer.parseInt(request.getParameter("curId"));
+        int bId = Integer.parseInt(request.getParameter("bId"));
+
+
+        Branch sendingBranch = branchService.getOne(bId);
+        Branch receivingBranch = branchService.getOne(MY_BRANCH_ID);
+        Currency currency = currencyService.getOne(curId);
+        receive.setSendingBranch(sendingBranch);
+        receive.setReceivingBranch(receivingBranch);
+        receive.setCurrency(currency);
+
+
+        receiveServices.save(receive);
+
+        if (receiveServices.save(receive).getId() <= 0)
+            throw new IllegalArgumentException("Entity Could Not Be Saved");
+
 
         return "{" +
                 "\"success\":\"true\"" +
                 "}";
     }
-
-
-
 
 
 }

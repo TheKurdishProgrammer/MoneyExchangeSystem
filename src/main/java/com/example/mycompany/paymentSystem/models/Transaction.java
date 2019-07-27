@@ -17,8 +17,25 @@ public class Transaction {
     private int id;
 
 
+
+
     private String senderName;
 
+
+    private boolean isSenderCustomer;
+    //if customer then connect with the customer
+
+    @ManyToOne
+    @JoinColumn
+    private Customer senderCustomer;
+
+    public boolean getIsSenderCustomer() {
+        return isSenderCustomer;
+    }
+
+    public void setIsSenderCustomer(boolean senderCustomer) {
+        isSenderCustomer = senderCustomer;
+    }
 
     private String receiverName;
     private String receiverPhoneNumber;
@@ -37,6 +54,8 @@ public class Transaction {
     private double receivedMoney;
 
     private boolean isApproved;
+
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn

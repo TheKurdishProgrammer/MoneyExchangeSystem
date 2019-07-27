@@ -48,7 +48,7 @@
                         <input placeholder="Sender Name" list="sender_customer_names" class="form-control" required id="senderName"
                                name="senderName" aria-describedby="ToCustomerInput"/>
                         <datalist id="sender_customer_names">
-                            <option th:each="customer : ${customers}" th:value="${customer.name}"
+                            <option th:each="customer : ${customers}" th:value="${customer.id}"
                                     th:label="${customer.name}">
                         </datalist>
 
