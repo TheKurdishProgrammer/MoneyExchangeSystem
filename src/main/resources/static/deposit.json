@@ -1,0 +1,61 @@
+{
+  "en": {
+    "Deposit Money": "Deposit Money",
+    "Home":"Home",
+    "Finance": "Finance",
+    "Deposit":"Deposit",
+    "Select Account": "Select Account",
+    "Sending Currency":"Sending Currency",
+     "Could not deposit!":"Could not deposit!",
+    "Customer no have box for such currency": "Customer no have box for such currency",
+    "Money Deposited!":"Money Deposited!",
+
+
+  },
+  "ar": {
+    "Deposit Money": "",
+    "Home":"",
+    "Finance": "",
+    "Deposit":"",
+    "Select Account": "",
+    "Sending Currency":"",
+     "Could not deposit!":"",
+    "Customer no have box for such currency": "",
+    "Money Deposited!":"",
+  },
+  "ku": {
+    "Home":"",
+    "Finance": "",
+    "Deposit":"",
+    "Select Account": "",
+    "Sending Currency":"",
+    "Deposit Money": "",
+    "Could not deposit!":"",
+    "Customer no have box for such currency": "",
+    "Money Deposited!":"",
+    "Please see the Deposit Invoice": ""
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+{
+  "en": {
+    "Transfer Money": "Transfer Money",
+    "Home":"Home",
+    "Finance": "Finance",
+    "Transfer":"Transfer",
+    "Sending Currency": "Sending Currency",
+     "Could not Transfer!": "Could not Transfer!",
+    "Customer no have box for such currency":"Customer no have box for such currency",
+    "Money Transferred!": "Money Transferred!",
+    "Please see the Transfer Invoice":"Please see the Transfer Invoice"
+  },
+  "ar": {
+    "Transfer Money": "",
+    "Home":"",
+    "Finance": "",
+    "Transfer":"",
+    "Sending Currency": "",
+     "Could not Transfer!": "",
+    "Customer no have box for such currency":"",
+    "Money Transferred!": "",
+    "Please see the Transfer Invoice":""
+  },
+  "ku": {
+    "Home":"",
+    "Finance": "",
+    "Transfer":"",
+    "Sending Currency": "",
+    "Transfer Money":"",
+    "Could not Transfer!": "",
+    "Customer no have box for such currency":"",
+    "Money Transferred!": ""
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
