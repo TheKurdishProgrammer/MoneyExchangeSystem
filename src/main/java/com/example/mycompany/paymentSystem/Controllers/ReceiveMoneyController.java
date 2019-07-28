@@ -12,14 +12,15 @@ import com.example.mycompany.paymentSystem.services.ReceiveMoneyServices;
 import com.example.mycompany.paymentSystem.services.TransactionService;
 import org.apache.commons.lang.StringUtils;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static com.example.mycompany.paymentSystem.Controllers.SendMoneyController.MY_BRANCH_ID;
 
@@ -63,26 +64,33 @@ public class ReceiveMoneyController {
 
     @RequestMapping(value = {"/transactions/{trName}", ""})
     @ResponseBody
-    public TransactionDto receiveMoney(@PathVariable(value = "trName") String searchQuery) {
+    public List<TransactionDto> receiveMoney(@PathVariable(value = "trName") String searchQuery) {
 
 
         boolean isNumeric = StringUtils.isNumeric(searchQuery);
-        Optional<Transaction> transaction;
+        List<Transaction> transactions = new ArrayList<>(1);
 
-        if (isNumeric)
-            transaction = transactionService.findById(searchQuery);
-        else
-            transaction = transactionService.findByName(searchQuery);
 
-        TransactionDto transactionDto = new ModelMapper().map(transaction.orElseGet(Transaction::new), TransactionDto.class);
 
+        if (isNumeric) {
+            transactionService.findById(searchQuery).ifPresent(transactions::add);
+        } else {
+            transactions = transactionService.findByName(searchQuery);
+        }
+
+        for (Transaction transaction : transactions)
+            if (transaction.getSenderName() == null)
+                transaction.setSenderName(transaction.getSenderCustomer().getName());
+
+
+        List<TransactionDto> transactionDtos = new ModelMapper().map(transactions, new TypeToken<List<TransactionDto>>() {
+        }.getType());
 
         //do the not found logic
 
         //todo retrieving transaction think again and
         // check in the html, weather go with form or without form
-        return transactionDto;
-
+        return transactionDtos;
     }
 
 

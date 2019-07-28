@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -50,7 +51,7 @@ public class TransactionService {
         transactionRepository.save(transaction);
     }
 
-    public Optional<Transaction> findByName(String searchQuery) {
+    public List<Transaction> findByName(String searchQuery) {
         return transactionRepository.getAllByReceiverNameContains(searchQuery);
     }
 }

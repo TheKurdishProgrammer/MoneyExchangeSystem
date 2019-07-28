@@ -8,12 +8,14 @@
 
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
           rel="stylesheet">
-    <link th:href="@{../css/jquery.signature.css}" rel="stylesheet">
+    <!--    <link th:href="@{../css/jquery.signature.css}" rel="stylesheet">-->
 
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script th:src="@{../js/jquery.signature.js}"></script>
+    <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!--    <script th:src="@{../js/jquery.signature.js}"></script>-->
 
 
     <script>
@@ -23,25 +25,19 @@
 
             $('#transaction_details').hide();
 
+
+
             $("#getTransaction").on('click', function (e) {
+
+                // jQuery.noConflict();
+
                 e.preventDefault();
-                var url = window.location.origin + $('form').attr('action') + $('#tr_num').val();     // Returns full URL (https://example.com/path/example.html)
+
+                var url = window.location.origin + $('form').attr('action') + $('#tr_num').val();
+
                 console.log(url);
-                $.getJSON(url, function (data) {
-
-                    console.log(data);
-                    $('#transaction_Id').html(data.id);
-                    $('#senderName').html(data.senderName);
-                    $('#receiveName').html(data.receiverName);
-                    $('#date').html(data.date);
-                    $('#receivingCurrency').html(data.receivingCurrency);
-                    $('#receivedAmount').html(data.receivedMoney);
-
-                    $('#transaction_details').show();
-
-                });
-
-            })
+                populateTransactionDate(url)
+            });
 
 
             $('#approveTransaction').on('click', function (e) {
@@ -61,6 +57,77 @@
             });
         });
 
+        function populateTransactionDate(url) {
+            $.getJSON(url, function (data) {
+
+                var isArray = Array.isArray(data);
+
+                // $("#exampleModal").modal('show');
+
+                console.log(data.length);
+
+                if (data.length > 1) {
+                    //then open the modal list
+                    $('.modal tbody').empty();
+                    for (var i = 0; i < data.length; i++) {
+                        var obj = data[i];
+                        $("#exampleModal").modal('toggle');
+
+
+                        $('.modal tbody').append(
+                            "<tr>" +
+                            "<td >" + obj.id + "</td>" +
+                            "<td>" + obj.receiverName + "</td>" +
+                            "<td>" + obj.receivedMoney + "</td>" +
+                            "<td>" + obj.receivingCurrency + "</td>" +
+                            "<td>" + obj.date.replace("T"," ").replace("000+0000","") + "</td>" +
+                            "<td class='d-flex justify-content-center'>" +
+                            "<a href=\"../transactions/"+obj.id+"\" class='transaction_item_list btn btn-success'><i style='color:white' class='fas fa-box-open' aria-hidden='true'>Show</i></a>" +
+                            "</td>" +
+                            "</tr>");
+
+
+
+
+
+
+                        console.log(obj);
+                    }
+
+                    $('.transaction_item_list').on('click', function (e) {
+
+
+                        e.preventDefault();
+
+                         var href = $(this).prop('href');
+                        // var href3 = window.location.origin + "/receive"+href2;
+
+                         console.log(href);
+                         populateTransactionDate(href);
+                        $("#exampleModal").modal('toggle');
+
+
+                    });
+
+                } else {
+                    //directly get the object
+                    $('#transaction_Id').html(data[0].id);
+                    $('#senderName').html(data[0].senderName);
+                    $('#receiveName').html(data[0].receiverName);
+                    $('#date').html(data[0].date);
+                    $('#receivingCurrency').html(data[0].receivingCurrency);
+                    $('#receivedAmount').html(data[0].receivedMoney);
+
+                    $('#transaction_details').show();
+
+
+
+                }
+
+
+            });
+
+        }
 
     </script>
 </head>
@@ -109,11 +176,91 @@
             <br>
 
 
-            <button id="getTransaction" type="submit" class="btn btn-info"><i class="fas fa-credit-card"
-                                                                              aria-hidden="true"></i> &nbsp;&nbsp;Get
+            <button id="getTransaction" type="submit"
+                    class="btn btn-info"><i class="fas fa-credit-card"
+                                            aria-hidden="true"></i> &nbsp;&nbsp;Get
                 Information
             </button>
         </form>
+
+
+        <!-- Modal -->
+        <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Select the Transaction</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <table class="table dataTable no-footer" role="grid">
+                            <thead class="thead-light">
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="transactions" rowspan="1"
+                                    colspan="1" aria-sort="ascending"
+                                    aria-label="ID: activate to sort column descending" style="width: 14px;">ID
+                                </th>
+
+
+                                <th class="sorting" tabindex="0" aria-controls="customers" rowspan="1"
+                                    colspan="1" aria-label="Receiver Name: activate to sort column ascending"
+                                    style="width: 92.667px;"><b>Receiver Name</b></th>
+
+
+                                <th class="sorting" tabindex="0" aria-controls="customers" rowspan="1"
+                                    colspan="1" aria-label="Amount: activate to sort column ascending"
+                                    style="width: 92.667px;"><b>Amount</b></th>
+
+                                <th class="sorting" tabindex="0" aria-controls="customers" rowspan="1"
+                                    colspan="1" aria-label="Currency: activate to sort column ascending"
+                                    style="width: 92.667px;"><b>Currency</b></th>
+
+                                <th class="sorting" tabindex="0" aria-controls="customers" rowspan="1"
+                                    colspan="1" aria-label="Date: activate to sort column ascending"
+                                    style="width: 131.333px;"><b>Date</b></th>
+
+                                <th class="sorting" tabindex="0" aria-controls="customers" rowspan="1"
+                                    colspan="1" aria-label="Actions: activate to sort column ascending"
+                                    style="width: 110px;"><b>Actions</b></th>
+                            </tr>
+                            </thead>
+                            <tbody id="transaction_list" th:remove="tag">
+
+
+                            <tr>
+                                <td id="transact_id" class="sorting_1">23</td>
+                                <td id="transact_receiver" class="sorting_1">MOhammed Test</td>
+                                <td id="transact_date" class="sorting_1">2018-8-8 23:31:39</td>
+
+
+                                <td class="d-flex justify-content-center">
+
+                                    <a href="test" class="btn btn-success"><i class="fas fa-box-open"
+                                                                              aria-hidden="true">Show</i></a>
+                                    <!--                                    <button style="margin-top:-7px;" type="submit" class="btn btn-success"><i-->
+                                    <!--                                            class="fas fa-box-open" aria-hidden="true">Show</i></button>-->
+
+                                </td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button  type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <br/>
@@ -211,6 +358,7 @@
 
 
 <script>
+
 
     var sig = $('#sig').signature();
 
