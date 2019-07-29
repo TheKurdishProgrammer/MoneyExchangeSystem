@@ -52,6 +52,8 @@ public class SendMoneyController {
 
     @PostMapping(value = {"/", ""})
     public String sendMoney(HttpServletRequest request, Transaction transaction, BindingResult result) {
+
+
         if (result.hasErrors()) {
             for (ObjectError allError : result.getAllErrors())
                 System.out.println(allError.getDefaultMessage());

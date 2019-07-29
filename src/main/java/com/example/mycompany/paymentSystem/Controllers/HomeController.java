@@ -14,6 +14,14 @@ import java.util.List;
 import static com.example.mycompany.paymentSystem.Controllers.SendMoneyController.MY_BRANCH_ID;
 
 
+/*
+
+
+        //todo
+        1-receive money approve button not wokring, only when entererd through ID
+
+ */
+
 @Controller
 @RequestMapping(value = {"","/", "/home"})
 

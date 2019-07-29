@@ -52,6 +52,6 @@ public class TransactionService {
     }
 
     public List<Transaction> findByName(String searchQuery) {
-        return transactionRepository.getAllByReceiverNameContains(searchQuery);
+        return transactionRepository.findAllByReceiverNameContainsAndIsApprovedFalse(searchQuery);
     }
 }
