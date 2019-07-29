@@ -48,19 +48,19 @@ public class HomeController {
 
 
 
-        long s1 = System.currentTimeMillis();
-        List<Receive> branches1 = branchService.getOne(MY_BRANCH_ID).getReceivedMoneys();
-        long f1 = System.currentTimeMillis();
-
-        System.out.println(f1-s1);
-
-
-        long s2 = System.currentTimeMillis();
-        List<Receive> branches2 = receiveMoneyServices.getBranchReceives(MY_BRANCH_ID);
-
-        long f2 = System.currentTimeMillis();
-
-        System.out.println(f2-s2);
+//        long s1 = System.currentTimeMillis();
+//        List<Receive> branches1 = branchService.getOne(MY_BRANCH_ID).getReceivedMoneys();
+//        long f1 = System.currentTimeMillis();
+//
+//        System.out.println(f1-s1);
+//
+//
+//        long s2 = System.currentTimeMillis();
+//        List<Receive> branches2 = receiveMoneyServices.getBranchReceives(MY_BRANCH_ID);
+//
+//        long f2 = System.currentTimeMillis();
+//
+//        System.out.println(f2-s2);
 
         int  branchCount = branchService.getCount();
         int sentTransCount = branchService.getBranchSendTransactionsCount(MY_BRANCH_ID);

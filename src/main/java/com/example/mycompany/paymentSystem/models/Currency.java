@@ -31,4 +31,12 @@ public class Currency {
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "currency")
     private List<CustomerCurrency> customerCurrencies;
 
+
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "fromCurrency")
+    private List<Exchange> exchangesFrom;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "toCurrency")
+    private List<Exchange> exchangesTo;
+
 }

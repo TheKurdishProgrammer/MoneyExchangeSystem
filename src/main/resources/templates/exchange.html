@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{fragments/main_layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script src="/js/currency.js">
+
+    </script>
+
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Send Money</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Send</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+
+
+        <form action="/exchange/" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user" aria-hidden="true"></i></span>
+                        </div>
+                        <!--                        <input name="senderName" id="senderName" type="text" class="form-control"-->
+                        <!--                               placeholder="Sender Name" aria-describedby="inputGroupPrepend" required="">-->
+
+                        <input placeholder="Customer Name" list="sender_customer_names" class="form-control" required
+                               id="senderName"
+                               name="customerId" aria-describedby="ToCustomerInput"/>
+                        <datalist id="sender_customer_names">
+                            <option th:each="customer : ${customers}" th:value="${customer.id}"
+                                    th:label="${customer.name}">
+                        </datalist>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <br>
+            <!--            number-->
+
+            <br>
+
+            <div class="form-row">
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-money-check-alt"
+                                                                  aria-hidden="true"></i></span>
+                        </div>
+                        <input id="sendingAmount" name="amount" type="text" class="form-control"
+                               placeholder="Amount" aria-describedby="inputGroupPrepend" required="">
+
+                    </div>
+
+                </div>
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-dollar-sign"
+                                                                  aria-hidden="true"></i></span>
+                        </div>
+                        <select aria-describedby="inputGroupPrepend" required="" th:name="fromCurrency"
+                                id="sendingCurrency" class="form-control">
+
+                            <option selected value="">Sending Currency</option>
+                            <option th:each="currency : ${currencies}"
+                                    th:value="${currency.id}"
+                                    th:utext="${currency.currency}"></option>
+                            <!--                                    th:value="${currency.id}"-->
+
+                        </select>
+
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-dollar-sign"
+                                                                  aria-hidden="true"></i></span>
+                        </div>
+                        <select aria-describedby="inputGroupPrepend" required="" th:name="toCurrency"
+                                id="receivingCurrency"
+                                class="form-control"
+                                name="id">
+                            <option selected disabled value="">To Currency</option>
+                            <option th:each="currency : ${currencies}"
+                                    th:value="${currency.id}"
+                                    th:utext="${currency.currency}"></option>
+                            <!--                                    th:value="${currency.id}"-->
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="form-row">
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-money-check-alt"
+                                                                  aria-hidden="true"></i></span>
+                        </div>
+                        <input type="number" class="form-control" id="exchangeRate"
+                               placeholder="Exchange Rate" aria-describedby="inputGroupPrepend" required="">
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-hand-holding-usd"
+                                                                  aria-hidden="true"></i></span>
+                        </div>
+                        <input class="form-control" placeholder="Converted Money" th:name="convertedMoney"
+                               id="receivedMoney"
+                               aria-describedby="inputGroupPrepend" required="">
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <br>
+
+            <button type="submit" class="btn btn-success"><i class="fas fa-credit-card" aria-hidden="true"></i>
+                &nbsp;&nbsp;Exchange Money
+            </button>
+        </form>
+
+
+    </div>
+
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+
+</div>
+
+
+</body>
+
+</html>
+<!--    <div class="preloader">-->
+<!--        <div class="lds-ripple">-->
+<!--            <div class="lds-pos"></div>-->
+<!--            <div class="lds-pos"></div>-->
+<!--        </div>-->
+<!--    </div>-->

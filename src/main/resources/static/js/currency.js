@@ -54,7 +54,7 @@ function currencyConverter(val,amount,cb) {
 
     if (val) {
         var total = val * amount;
-        console.log(total);
+        console.log(val +" "+ amount);
 
         cb(null, Math.round(total * 100) / 100);
     } else {
