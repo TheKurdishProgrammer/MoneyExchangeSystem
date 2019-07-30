@@ -3,10 +3,7 @@ package com.example.mycompany.paymentSystem.Controllers;
 
 import com.example.mycompany.paymentSystem.models.Branch;
 import com.example.mycompany.paymentSystem.models.Transaction;
-import com.example.mycompany.paymentSystem.services.BranchService;
-import com.example.mycompany.paymentSystem.services.CurrencyService;
-import com.example.mycompany.paymentSystem.services.CustomerService;
-import com.example.mycompany.paymentSystem.services.TransactionService;
+import com.example.mycompany.paymentSystem.services.*;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -37,6 +35,9 @@ public class SendMoneyController {
     private CustomerService customerService;
 
 
+    @Autowired
+    private InvoiceService invoiceService;
+
     @RequestMapping(value = {"/", ""})
     public String index(Model model) {
 
@@ -51,6 +52,7 @@ public class SendMoneyController {
     }
 
     @PostMapping(value = {"/", ""})
+    @ResponseBody
     public String sendMoney(HttpServletRequest request, Transaction transaction, BindingResult result) {
 
 
@@ -73,6 +75,8 @@ public class SendMoneyController {
 
         transactionService.save(transaction);
 
-        return "send";
+        String x = invoiceService.printInvoice(transaction);
+        return x;
+//        return "send";
     }
 }

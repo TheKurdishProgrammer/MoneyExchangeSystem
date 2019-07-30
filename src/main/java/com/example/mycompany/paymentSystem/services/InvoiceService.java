@@ -9,6 +9,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.jasperreports.JasperReportsUtils;
 
 import java.io.File;
@@ -20,9 +21,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+@Service
 public class InvoiceService {
 
-    @Autowired
 //    private InvoiceRepository invoiceRepository;
 
 //    @Autowired
@@ -38,7 +39,7 @@ public class InvoiceService {
 //    }
 
 
-    public String generateInvoiceFor(Transaction order, Locale locale) throws IOException {
+    public String generateInvoriceFor(Transaction order, Locale locale) throws IOException {
 
         // Create a temporary PDF file
         File pdfFile = File.createTempFile("my-invoice", ".pdf");
@@ -79,7 +80,7 @@ public class InvoiceService {
     private JasperReport loadTemplate() throws JRException {
 
 
-        final InputStream reportInputStream = getClass().getResourceAsStream("/jasper/invoice.jrxml");
+        final InputStream reportInputStream = getClass().getResourceAsStream("/jasper/send_money.jrxml");
         final JasperDesign jasperDesign = JRXmlLoader.load(reportInputStream);
 
         return JasperCompileManager.compileReport(jasperDesign);
@@ -89,7 +90,17 @@ public class InvoiceService {
 
         String pdfLink = "";
         try {
-            pdfLink = generateInvoiceFor(invoice, Locale.ENGLISH);
+            pdfLink = generateInvoriceFor(invoice, Locale.ENGLISH);
+
+            invoice.getReceiverPhoneNumber();
+            invoice.getSenderName();
+            invoice.getSendingAmount();
+            invoice.getSendingCurrency();
+            invoice.getReceivingCurrency();
+            invoice.getReceivedMoney();
+
+
+
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
