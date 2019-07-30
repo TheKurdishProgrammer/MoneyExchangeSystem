@@ -27,7 +27,7 @@ import static com.example.mycompany.paymentSystem.Controllers.SendMoneyControlle
 
 public class HomeController {
 
-    private int counter = 2;
+    private int counter = 1;
 
     @Autowired
     private BranchService branchService;
@@ -80,10 +80,8 @@ public class HomeController {
         model.addAttribute("branchReceiveTransactionsCount",receievedTransCount);
 
 
-
-
-
         return "dashboard";
+
 
 
     }

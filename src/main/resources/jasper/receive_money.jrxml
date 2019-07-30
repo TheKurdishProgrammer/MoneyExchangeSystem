@@ -66,12 +66,13 @@
                     <![CDATA["https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"]]></imageExpression>
             </image>
             <textField>
-
-                <reportElement x="200" y="27" width="360" height="30" uuid="e086d53d-1677-4b80-b167-4855d4c118ec"/>
+                <reportElement key="" x="360" y="30" width="360" height="30"
+                               uuid="e086d53d-1677-4b80-b167-4855d4c118ec"/>
                 <textElement verticalAlignment="Middle">
-                    <font size="16" isBold="true"/>
+                    <font size="26" isBold="true"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$R{jasper.invoice.TransactionId.label} + ": " + $P{order}.getId()]]></textFieldExpression>
+                <textFieldExpression>
+                    <![CDATA[$R{jasper.invoice.TransactionId.label} + ": " + $P{order}.getId()]]></textFieldExpression>
             </textField>
         </band>
     </title>

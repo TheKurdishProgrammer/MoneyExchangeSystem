@@ -75,6 +75,9 @@ public class SendMoneyController {
 
         transactionService.save(transaction);
 
+        if (transaction.getSenderName() == null)
+            transaction.setSenderName(transaction.getSenderCustomer().getName());
+
         String x = invoiceService.printInvoice(transaction);
         return x;
 //        return "send";

@@ -6,10 +6,7 @@ import com.example.mycompany.paymentSystem.models.Currency;
 import com.example.mycompany.paymentSystem.models.DTO.TransactionDto;
 import com.example.mycompany.paymentSystem.models.Receive;
 import com.example.mycompany.paymentSystem.models.Transaction;
-import com.example.mycompany.paymentSystem.services.BranchService;
-import com.example.mycompany.paymentSystem.services.CurrencyService;
-import com.example.mycompany.paymentSystem.services.ReceiveMoneyServices;
-import com.example.mycompany.paymentSystem.services.TransactionService;
+import com.example.mycompany.paymentSystem.services.*;
 import org.apache.commons.lang.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -40,6 +37,9 @@ public class ReceiveMoneyController {
 
     @Autowired
     private ReceiveMoneyServices receiveServices;
+
+    @Autowired
+    private InvoiceService invoiceService;
 
 
     @RequestMapping(value = {"", "/same/", "/same"})
@@ -136,10 +136,10 @@ public class ReceiveMoneyController {
             throw new IllegalArgumentException("Entity Could Not Be Saved");
 
 
+        invoiceService.printInvoice(receive);
+
         return "{" +
                 "\"success\":\"true\"" +
                 "}";
     }
-
-
 }

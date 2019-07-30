@@ -39,7 +39,7 @@ public class InvoiceService {
 //    }
 
 
-    public String generateInvoriceFor(Transaction order, Locale locale) throws IOException {
+    public String generateInvoriceFor(Object order, Locale locale) throws IOException {
 
         // Create a temporary PDF file
         File pdfFile = File.createTempFile("my-invoice", ".pdf");
@@ -66,7 +66,7 @@ public class InvoiceService {
     }
 
     // Fill template order parametres
-    private Map<String, Object> parameters(Transaction order, Locale locale) {
+    private Map<String, Object> parameters(Object order, Locale locale) {
         final Map<String, Object> parameters = new HashMap<>();
 
         parameters.put("order", order);
@@ -86,21 +86,11 @@ public class InvoiceService {
         return JasperCompileManager.compileReport(jasperDesign);
     }
 
-    public String printInvoice(Transaction invoice) {
+    public String printInvoice(Object invoice) {
 
         String pdfLink = "";
         try {
             pdfLink = generateInvoriceFor(invoice, Locale.ENGLISH);
-
-            ;
-            ;
-            ;
-            ;
-            ;
-            ;
-
-
-
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
