@@ -71,7 +71,7 @@
                     <font size="16" isBold="true"/>
                 </textElement>
                 <textFieldExpression>
-                    <![CDATA[$R{jasper.send.senderName.label} + ": " + $P{order}.getId()]]></textFieldExpression>
+                    <![CDATA[$R{jasper.invoice.TransactionId.label} + ": " + $P{order}.getId()]]></textFieldExpression>
             </textField>
         </band>
     </title>
@@ -88,15 +88,56 @@
                     <textElement verticalAlignment="Middle">
                         <font size="13" isBold="true"/>
                     </textElement>
-                    <textFieldExpression><![CDATA[$R{jasper.invoice.address.label}]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[$R{jasper.invoice.TransactionInfo.label}]]></textFieldExpression>
                 </textField>
+
                 <textField>
                     <reportElement x="0" y="31" width="380" height="19" uuid="8af70123-a7c6-4ff7-91eb-6adc1fd0d3e9"/>
                     <textElement verticalAlignment="Top">
                         <font size="11" isBold="false"/>
                     </textElement>
-                    <textFieldExpression><![CDATA[$R{jasper.invoice.address.label} + ": "+$P{order}.getReceiverName()]]></textFieldExpression>
+                    <textFieldExpression>
+                        <![CDATA[$R{jasper.invoice.receieverphonenumber.label=Receiver Phone Number} + ": "+$P{invoice.getReceiverPhoneNumber()}]]>
+                    </textFieldExpression>
                 </textField>
+
+<!--                <textField>-->
+<!--                    <reportElement x="0" y="31" width="380" height="19" uuid="8af70123-a7c6-4ff7-91eb-6adc1fd0d3e9"/>-->
+<!--                    <textElement verticalAlignment="Top">-->
+<!--                        <font size="11" isBold="false"/>-->
+<!--                    </textElement>-->
+<!--                    <textFieldExpression><![CDATA[$R{jasper.invoice.SenderName.label} + ": "+invoice.getSenderName()]]></textFieldExpression>-->
+<!--                </textField>-->
+<!--                <textField>-->
+<!--                    <reportElement x="0" y="31" width="380" height="19" uuid="8af70123-a7c6-4ff7-91eb-6adc1fd0d3e9"/>-->
+<!--                    <textElement verticalAlignment="Top">-->
+<!--                        <font size="11" isBold="false"/>-->
+<!--                    </textElement>-->
+<!--                    <textFieldExpression><![CDATA[$R{jasper.invoice.SendingAmount.label} + ": "+invoice.getSendingAmount()]]></textFieldExpression>-->
+<!--                </textField>-->
+<!--                <textField>-->
+<!--                    <reportElement x="0" y="31" width="380" height="19" uuid="8af70123-a7c6-4ff7-91eb-6adc1fd0d3e9"/>-->
+<!--                    <textElement verticalAlignment="Top">-->
+<!--                        <font size="11" isBold="false"/>-->
+<!--                    </textElement>-->
+<!--                    <textFieldExpression><![CDATA[$R{jasper.invoice.SendingCurrency.label} + ": "+invoice.getSendingCurrency()]]></textFieldExpression>-->
+<!--                </textField>-->
+<!--                <textField>-->
+<!--                    <reportElement x="0" y="31" width="380" height="19" uuid="8af70123-a7c6-4ff7-91eb-6adc1fd0d3e9"/>-->
+<!--                    <textElement verticalAlignment="Top">-->
+<!--                        <font size="11" isBold="false"/>-->
+<!--                    </textElement>-->
+<!--                    <textFieldExpression><![CDATA[$R{jasper.invoice.ReceivingCurrency.label} + ": "+invoice.getReceivingCurrency()]]></textFieldExpression>-->
+<!--                </textField>-->
+<!--                <textField>-->
+<!--                    <reportElement x="0" y="31" width="380" height="19" uuid="8af70123-a7c6-4ff7-91eb-6adc1fd0d3e9"/>-->
+<!--                    <textElement verticalAlignment="Top">-->
+<!--                        <font size="11" isBold="false"/>-->
+<!--                    </textElement>-->
+<!--                    <textFieldExpression><![CDATA[$R{jasper.invoice.ReceivedMoney.label} + ": "+invoice.getReceivedMoney()]]></textFieldExpression>-->
+<!--                </textField>-->
+
+
 
 
 

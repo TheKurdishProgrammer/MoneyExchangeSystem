@@ -92,12 +92,12 @@ public class InvoiceService {
         try {
             pdfLink = generateInvoriceFor(invoice, Locale.ENGLISH);
 
-            invoice.getReceiverPhoneNumber();
-            invoice.getSenderName();
-            invoice.getSendingAmount();
-            invoice.getSendingCurrency();
-            invoice.getReceivingCurrency();
-            invoice.getReceivedMoney();
+            ;
+            ;
+            ;
+            ;
+            ;
+            ;
 
 
 
